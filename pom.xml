@@ -218,7 +218,7 @@
 				<version>2.3.2</version>
 				<configuration>
 					<remoteTagging>true</remoteTagging>
-					<preparationGoals>clean install</preparationGoals>
+					<preparationGoals>clean deploy</preparationGoals>
 					<autoVersionSubmodules>true</autoVersionSubmodules>
 				</configuration>
 			</plugin>
