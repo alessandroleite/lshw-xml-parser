@@ -1,4 +1,4 @@
-[lshw][lshw] (Hardware Lister) XML Parser [![Build Status](https://travis-ci.org/alessandroleite/lshw-xml-parser.png)](https://travis-ci.org/alessandroleite/lshw-xml-parser)	       
+[lshw][lshw] (Hardware Lister) XML Parser [![Build Status](https://travis-ci.org/alessandroleite/lshw-xml-parser.png?branch=master)](https://travis-ci.org/alessandroleite/lshw-xml-parser)
 ===================
 
 What is it ?
