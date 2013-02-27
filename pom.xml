@@ -4,7 +4,7 @@
 	<groupId>lshw</groupId>
 	<artifactId>xml-parser</artifactId>
 	<packaging>jar</packaging>
-	<version>0.3</version>
+	<version>0.4-SNAPSHOT</version>
 
 	<inceptionYear>2013</inceptionYear>
 
@@ -30,7 +30,7 @@
 		<connection>scm:git:ssh://github.com/alessandroleite/lshw-xml-parser.git</connection>
 		<developerConnection>scm:git:git@github.com:alessandroleite/lshw-xml-parser.git</developerConnection>
 		<url>https://github.com/alessandroleite/lshw-xml-parser</url>
-	  <tag>xml-parser-0.3</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 	<dependencies>
