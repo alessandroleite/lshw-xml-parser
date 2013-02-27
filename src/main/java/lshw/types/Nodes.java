@@ -36,6 +36,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
+import com.sun.corba.se.impl.orbutil.graph.Node;
+
 @XmlRootElement(name = "list")
 @XmlAccessorType(value = XmlAccessType.FIELD)
 public class Nodes implements Iterable<NodeInfo>, Serializable {
@@ -74,6 +76,45 @@ public class Nodes implements Iterable<NodeInfo>, Serializable {
 		this.nodes = nodes;
 	}
 
+	/**
+	 * Return the {@link NodeInfo} that has a given id.
+	 * 
+	 * @param id
+	 *            The if of the {@link NodeInfo} to be returned.
+	 * @return <code>null</code> if the {@link Node} does not exist or the
+	 *         {@link NodeInfo} that has the given id.
+	 */
+	public NodeInfo getNodeById(String id) {
+		int index = this.getNodes().indexOf(NodeInfo.valueOf(id));
+		return index < 0 ? null : this.getNodes().get(index);
+	}
+
+	/**
+	 * Returns the first {@link NodeInfo} or <code>null</code> if the list is
+	 * empty.
+	 * 
+	 * @return the first {@link NodeInfo} or <code>null</code> if the list is
+	 *         empty.
+	 */
+	public NodeInfo first() {
+		return this.getNodes().isEmpty() ? null : this.getNodes().get(0);
+	}
+
+	/**
+	 * Returns the last {@link NodeInfo} or <code>null</code> if the list is
+	 * empty.
+	 * 
+	 * @return the last {@link NodeInfo} or <code>null</code> if the list is
+	 *         empty.
+	 */
+	public NodeInfo last() {
+		int size = this.getNodes().size();
+		return size > 0 ? this.getNodes().get(size - 1) : null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this,
