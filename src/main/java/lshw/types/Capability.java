@@ -23,7 +23,7 @@
 package lshw.types;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -37,17 +37,17 @@ import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
  * <p>
- * Java class for measured complex type.
+ * Java class for capentry complex type.
  * 
  * <p>
  * The following schema fragment specifies the expected content contained within
  * this class.
  * 
  * <pre>
- * &lt;complexType name="measured">
+ * &lt;complexType name="capentry">
  *   &lt;simpleContent>
- *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>decimal">
- *       &lt;attribute name="units" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
+ *       &lt;attribute name="id" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>
  *   &lt;/simpleContent>
  * &lt;/complexType>
@@ -56,26 +56,38 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "measured", propOrder = { "value" })
-public class Measured implements Serializable {
+@XmlType(name = "capentry", propOrder = { "value" })
+public class Capability implements Serializable, Cloneable,
+		Comparable<Capability> {
 
 	/**
 	 * Serial code version <code>serialVersionUID<code>
 	 */
-	private static final long serialVersionUID = -6707441791766045053L;
-
+	private static final long serialVersionUID = -7358650020783737664L;
 	@XmlValue
-	protected BigDecimal value;
-	@XmlAttribute(name = "units")
-	protected String units;
+	protected String value;
+	@XmlAttribute(name = "id")
+	protected String id;
+
+	public Capability() {
+	}
+
+	public Capability(Capability other) {
+		this(other.getId(), other.getValue());
+	}
+
+	public Capability(String id, String value) {
+		this.id = id;
+		this.value = value;
+	}
 
 	/**
 	 * Gets the value of the value property.
 	 * 
-	 * @return possible object is {@link BigDecimal }
+	 * @return possible object is {@link String }
 	 * 
 	 */
-	public BigDecimal getValue() {
+	public String getValue() {
 		return value;
 	}
 
@@ -83,32 +95,32 @@ public class Measured implements Serializable {
 	 * Sets the value of the value property.
 	 * 
 	 * @param value
-	 *            allowed object is {@link BigDecimal }
+	 *            allowed object is {@link String }
 	 * 
 	 */
-	public void setValue(BigDecimal value) {
+	public void setValue(String value) {
 		this.value = value;
 	}
 
 	/**
-	 * Gets the value of the units property.
+	 * Gets the value of the id property.
 	 * 
 	 * @return possible object is {@link String }
 	 * 
 	 */
-	public String getUnits() {
-		return units;
+	public String getId() {
+		return id;
 	}
 
 	/**
-	 * Sets the value of the units property.
+	 * Sets the value of the id property.
 	 * 
 	 * @param value
 	 *            allowed object is {@link String }
 	 * 
 	 */
-	public void setUnits(String value) {
-		this.units = value;
+	public void setId(String value) {
+		this.id = value;
 	}
 
 	/**
@@ -134,5 +146,22 @@ public class Measured implements Serializable {
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this,
 				ToStringStyle.MULTI_LINE_STYLE);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected Capability clone() {
+		return new Capability(this);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int compareTo(Capability other) {
+		return (this.getId() != null) ? this.getId().compareTo(other.getId())
+				: -1;
 	}
 }

@@ -22,8 +22,10 @@
  */
 package lshw.types;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -36,26 +38,31 @@ import org.apache.commons.lang.builder.ToStringStyle;
 
 @XmlRootElement(name = "list")
 @XmlAccessorType(value = XmlAccessType.FIELD)
-public class Nodes {
+public class Nodes implements Iterable<NodeInfo>, Serializable {
+
+	/**
+	 * Serial code version <code>serialVersionUID<code>
+	 */
+	private static final long serialVersionUID = 4147681342953174255L;
 
 	@XmlElement(name = "node")
-	private List<Nodeinfo> nodes = new ArrayList<>();
+	private List<NodeInfo> nodes = new ArrayList<>();
 
 	public Nodes() {
 	}
 
-	public Nodes(List<Nodeinfo> nodes) {
+	public Nodes(List<NodeInfo> nodes) {
 		this.nodes.addAll(nodes);
 	}
 
-	public Nodes(Nodeinfo... nodeinfos) {
+	public Nodes(NodeInfo... nodeinfos) {
 		this(Arrays.asList(nodeinfos));
 	}
 
 	/**
 	 * @return the nodes
 	 */
-	public List<Nodeinfo> getNodes() {
+	public List<NodeInfo> getNodes() {
 		return nodes == null ? nodes = new ArrayList<>() : nodes;
 	}
 
@@ -63,7 +70,7 @@ public class Nodes {
 	 * @param nodes
 	 *            the nodes to set
 	 */
-	public void setNodes(List<Nodeinfo> nodes) {
+	public void setNodes(List<NodeInfo> nodes) {
 		this.nodes = nodes;
 	}
 
@@ -71,5 +78,13 @@ public class Nodes {
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this,
 				ToStringStyle.MULTI_LINE_STYLE);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Iterator<NodeInfo> iterator() {
+		return this.getNodes().iterator();
 	}
 }

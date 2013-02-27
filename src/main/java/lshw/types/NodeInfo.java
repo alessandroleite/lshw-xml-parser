@@ -31,6 +31,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -78,9 +80,9 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "nodeinfo", propOrder = { "description", "product", "vendor",
-		"physid", "version", "serial", "businfo", "slot", "size", "capacity",
-		"clock", "width", "configuration", "capabilities", "resources", "node" })
-public class Nodeinfo {
+		"physId", "version", "serial", "busInfo", "slot", "size", "capacity",
+		"clock", "width", "configuration", "capabilities", "resources", "node", "logicalName" })
+public class NodeInfo {
 
 	@XmlElement(required = true)
 	protected String description;
@@ -88,14 +90,14 @@ public class Nodeinfo {
 	protected String product;
 	@XmlElement(required = true)
 	protected String vendor;
-	@XmlElement(required = true)
-	protected String physid;
+	@XmlElement(required = true, name="physid")
+	protected String physId;
 	@XmlElement(required = true)
 	protected String version;
 	@XmlElement(required = true)
 	protected String serial;
-	@XmlElement(required = true)
-	protected String businfo;
+	@XmlElement(required = true, name = "businfo")
+	protected String busInfo;
 	@XmlElement(required = true)
 	protected String slot;
 	@XmlElement(required = true)
@@ -107,13 +109,13 @@ public class Nodeinfo {
 	@XmlElement(required = true)
 	protected Measured width;
 	@XmlElement(required = true)
-	protected Configinfo configuration;
+	protected Configurations configuration;
 	@XmlElement(required = true)
-	protected Capinfo capabilities;
+	protected Capabilities capabilities;
 	@XmlElement(required = true)
-	protected Resinfo resources;
+	protected Resources resources;
 	@XmlElement(required = true)
-	protected List<Nodeinfo> node;
+	protected List<NodeInfo> node;
 	@XmlAttribute(name = "id")
 	protected String id;
 	@XmlAttribute(name = "handle")
@@ -124,6 +126,8 @@ public class Nodeinfo {
 	protected Boolean claimed;
 	@XmlAttribute(name = "disabled")
 	protected Boolean disabled;
+	@XmlAttribute(name = "logicalname")
+	protected String logicalName;
 
 	/**
 	 * Gets the value of the description property.
@@ -189,13 +193,13 @@ public class Nodeinfo {
 	}
 
 	/**
-	 * Gets the value of the physid property.
+	 * Gets the value of the physId property.
 	 * 
 	 * @return possible object is {@link String }
 	 * 
 	 */
-	public String getPhysid() {
-		return physid;
+	public String getPhysId() {
+		return physId;
 	}
 
 	/**
@@ -205,8 +209,8 @@ public class Nodeinfo {
 	 *            allowed object is {@link String }
 	 * 
 	 */
-	public void setPhysid(String value) {
-		this.physid = value;
+	public void setPhysId(String value) {
+		this.physId = value;
 	}
 
 	/**
@@ -257,8 +261,8 @@ public class Nodeinfo {
 	 * @return possible object is {@link String }
 	 * 
 	 */
-	public String getBusinfo() {
-		return businfo;
+	public String getBusInfo() {
+		return busInfo;
 	}
 
 	/**
@@ -268,8 +272,8 @@ public class Nodeinfo {
 	 *            allowed object is {@link String }
 	 * 
 	 */
-	public void setBusinfo(String value) {
-		this.businfo = value;
+	public void setBusInfo(String value) {
+		this.busInfo = value;
 	}
 
 	/**
@@ -380,10 +384,10 @@ public class Nodeinfo {
 	/**
 	 * Gets the value of the configuration property.
 	 * 
-	 * @return possible object is {@link Configinfo }
+	 * @return possible object is {@link Configurations }
 	 * 
 	 */
-	public Configinfo getConfiguration() {
+	public Configurations getConfiguration() {
 		return configuration;
 	}
 
@@ -391,20 +395,20 @@ public class Nodeinfo {
 	 * Sets the value of the configuration property.
 	 * 
 	 * @param value
-	 *            allowed object is {@link Configinfo }
+	 *            allowed object is {@link Configurations }
 	 * 
 	 */
-	public void setConfiguration(Configinfo value) {
+	public void setConfiguration(Configurations value) {
 		this.configuration = value;
 	}
 
 	/**
 	 * Gets the value of the capabilities property.
 	 * 
-	 * @return possible object is {@link Capinfo }
+	 * @return possible object is {@link Capabilities }
 	 * 
 	 */
-	public Capinfo getCapabilities() {
+	public Capabilities getCapabilities() {
 		return capabilities;
 	}
 
@@ -412,20 +416,20 @@ public class Nodeinfo {
 	 * Sets the value of the capabilities property.
 	 * 
 	 * @param value
-	 *            allowed object is {@link Capinfo }
+	 *            allowed object is {@link Capabilities }
 	 * 
 	 */
-	public void setCapabilities(Capinfo value) {
+	public void setCapabilities(Capabilities value) {
 		this.capabilities = value;
 	}
 
 	/**
 	 * Gets the value of the resources property.
 	 * 
-	 * @return possible object is {@link Resinfo }
+	 * @return possible object is {@link Resources }
 	 * 
 	 */
-	public Resinfo getResources() {
+	public Resources getResources() {
 		return resources;
 	}
 
@@ -433,10 +437,10 @@ public class Nodeinfo {
 	 * Sets the value of the resources property.
 	 * 
 	 * @param value
-	 *            allowed object is {@link Resinfo }
+	 *            allowed object is {@link Resources }
 	 * 
 	 */
-	public void setResources(Resinfo value) {
+	public void setResources(Resources value) {
 		this.resources = value;
 	}
 
@@ -458,13 +462,13 @@ public class Nodeinfo {
 	 * 
 	 * 
 	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link Nodeinfo }
+	 * Objects of the following type(s) are allowed in the list {@link NodeInfo }
 	 * 
 	 * 
 	 */
-	public List<Nodeinfo> getNode() {
+	public List<NodeInfo> getNode() {
 		if (node == null) {
-			node = new ArrayList<Nodeinfo>();
+			node = new ArrayList<NodeInfo>();
 		}
 		return this.node;
 	}
@@ -573,7 +577,41 @@ public class Nodeinfo {
 	public void setDisabled(Boolean value) {
 		this.disabled = value;
 	}
+	
 
+	/**
+	 * @return the logicalName
+	 */
+	public String getLogicalName() {
+		return logicalName;
+	}
+
+	/**
+	 * @param logicalName the logicalName to set
+	 */
+	public void setLogicalName(String logicalName) {
+		this.logicalName = logicalName;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		return EqualsBuilder.reflectionEquals(this, obj);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this,

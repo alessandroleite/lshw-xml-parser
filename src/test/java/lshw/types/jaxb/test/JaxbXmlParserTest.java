@@ -30,8 +30,8 @@ import java.io.InputStream;
 
 import javax.xml.bind.JAXBException;
 
+import lshw.parser.xml.jaxb.JaxbXmlParser;
 import lshw.types.Nodes;
-import lshw.types.jaxb.parser.JaxbXmlParser;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;

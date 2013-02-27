@@ -23,7 +23,7 @@
 package lshw.types;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -37,17 +37,18 @@ import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
  * <p>
- * Java class for measured complex type.
+ * Java class for resentry complex type.
  * 
  * <p>
  * The following schema fragment specifies the expected content contained within
  * this class.
  * 
  * <pre>
- * &lt;complexType name="measured">
+ * &lt;complexType name="resentry">
  *   &lt;simpleContent>
- *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>decimal">
- *       &lt;attribute name="units" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *     &lt;extension base="&lt;http://www.w3.org/2001/XMLSchema>string">
+ *       &lt;attribute name="type" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *       &lt;attribute name="value" type="{http://www.w3.org/2001/XMLSchema}string" />
  *     &lt;/extension>
  *   &lt;/simpleContent>
  * &lt;/complexType>
@@ -56,26 +57,28 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "measured", propOrder = { "value" })
-public class Measured implements Serializable {
+@XmlType(name = "resentry", propOrder = { "value" })
+public class ResourceEntry implements Serializable {
 
 	/**
 	 * Serial code version <code>serialVersionUID<code>
 	 */
-	private static final long serialVersionUID = -6707441791766045053L;
+	private static final long serialVersionUID = -3978556495645537385L;
 
 	@XmlValue
-	protected BigDecimal value;
-	@XmlAttribute(name = "units")
-	protected String units;
+	protected String value;
+	@XmlAttribute(name = "type")
+	protected String type;
+	@XmlAttribute(name = "value")
+	protected String val;
 
 	/**
 	 * Gets the value of the value property.
 	 * 
-	 * @return possible object is {@link BigDecimal }
+	 * @return possible object is {@link String }
 	 * 
 	 */
-	public BigDecimal getValue() {
+	public String getValue() {
 		return value;
 	}
 
@@ -83,32 +86,53 @@ public class Measured implements Serializable {
 	 * Sets the value of the value property.
 	 * 
 	 * @param value
-	 *            allowed object is {@link BigDecimal }
+	 *            allowed object is {@link String }
 	 * 
 	 */
-	public void setValue(BigDecimal value) {
+	public void setValue(String value) {
 		this.value = value;
 	}
 
 	/**
-	 * Gets the value of the units property.
+	 * Gets the value of the type property.
 	 * 
 	 * @return possible object is {@link String }
 	 * 
 	 */
-	public String getUnits() {
-		return units;
+	public String getType() {
+		return type;
 	}
 
 	/**
-	 * Sets the value of the units property.
+	 * Sets the value of the type property.
 	 * 
 	 * @param value
 	 *            allowed object is {@link String }
 	 * 
 	 */
-	public void setUnits(String value) {
-		this.units = value;
+	public void setType(String value) {
+		this.type = value;
+	}
+
+	/**
+	 * Gets the value of the val property.
+	 * 
+	 * @return possible object is {@link String }
+	 * 
+	 */
+	public String getVal() {
+		return val;
+	}
+
+	/**
+	 * Sets the value of the val property.
+	 * 
+	 * @param value
+	 *            allowed object is {@link String }
+	 * 
+	 */
+	public void setVal(String value) {
+		this.val = value;
 	}
 
 	/**

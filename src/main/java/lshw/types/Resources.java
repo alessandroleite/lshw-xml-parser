@@ -22,18 +22,26 @@
  */
 package lshw.types;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
- * <p>Java class for resinfo complex type.
+ * <p>
+ * Java class for resinfo complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="resinfo">
@@ -50,40 +58,60 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "resinfo", propOrder = {
-    "resource"
-})
-public class Resinfo {
+@XmlType(name = "resinfo", propOrder = { "resources" })
+public class Resources implements Serializable, Iterable<ResourceEntry> {
 
-    @XmlElement(required = true)
-    protected List<Resentry> resource;
+	/**
+	 * Serial code version <code>serialVersionUID<code>
+	 */
+	private static final long serialVersionUID = -2853995430631934030L;
 
-    /**
-     * Gets the value of the resource property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the resource property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getResource().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Resentry }
-     * 
-     * 
-     */
-    public List<Resentry> getResource() {
-        if (resource == null) {
-            resource = new ArrayList<Resentry>();
-        }
-        return this.resource;
-    }
+	@XmlElement(required = true, name="resource")
+	protected List<ResourceEntry> resources;
+
+	/**
+	 * Gets the value of the resource property.
+	 * 
+	 * <p>
+	 * This accessor method returns a reference to the live list, not a
+	 * snapshot. Therefore any modification you make to the returned list will
+	 * be present inside the JAXB object. This is why there is not a
+	 * <CODE>set</CODE> method for the resource property.
+	 * 
+	 * <p>
+	 * For example, to add a new item, do as follows:
+	 * 
+	 * <pre>
+	 * getResource().add(newItem);
+	 * </pre>
+	 * 
+	 * 
+	 * <p>
+	 * Objects of the following type(s) are allowed in the list {@link ResourceEntry }
+	 * 
+	 * 
+	 */
+	public List<ResourceEntry> getResources() {
+		if (resources == null) {
+			resources = new ArrayList<ResourceEntry>();
+		}
+		return this.resources;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this,
+				ToStringStyle.MULTI_LINE_STYLE);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Iterator<ResourceEntry> iterator() {
+		return this.getResources().iterator();
+	}
 }

@@ -65,35 +65,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Nodeinfo }
+     * Create an instance of {@link NodeInfo }
      * 
      */
-    public Nodeinfo createNodeinfo() {
-        return new Nodeinfo();
+    public NodeInfo createNodeinfo() {
+        return new NodeInfo();
     }
 
     /**
-     * Create an instance of {@link Configinfo }
+     * Create an instance of {@link Configurations }
      * 
      */
-    public Configinfo createConfiginfo() {
-        return new Configinfo();
+    public Configurations createConfiginfo() {
+        return new Configurations();
     }
 
     /**
-     * Create an instance of {@link Capentry }
+     * Create an instance of {@link Capability }
      * 
      */
-    public Capentry createCapentry() {
-        return new Capentry();
+    public Capability createCapentry() {
+        return new Capability();
     }
 
     /**
-     * Create an instance of {@link Capinfo }
+     * Create an instance of {@link Capabilities }
      * 
      */
-    public Capinfo createCapinfo() {
-        return new Capinfo();
+    public Capabilities createCapinfo() {
+        return new Capabilities();
     }
 
     /**
@@ -105,35 +105,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Resinfo }
+     * Create an instance of {@link Resources }
      * 
      */
-    public Resinfo createResinfo() {
-        return new Resinfo();
+    public Resources createResinfo() {
+        return new Resources();
     }
 
     /**
-     * Create an instance of {@link Configentry }
+     * Create an instance of {@link Configuration }
      * 
      */
-    public Configentry createConfigentry() {
-        return new Configentry();
+    public Configuration createConfigentry() {
+        return new Configuration();
     }
 
     /**
-     * Create an instance of {@link Resentry }
+     * Create an instance of {@link ResourceEntry }
      * 
      */
-    public Resentry createResentry() {
-        return new Resentry();
+    public ResourceEntry createResentry() {
+        return new ResourceEntry();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link Nodeinfo }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link NodeInfo }{@code >}}
      */
     @XmlElementDecl(namespace = "http://www.ezix.org", name = "node")
-    public JAXBElement<Nodeinfo> createNode(Nodeinfo value) {
-        return new JAXBElement<Nodeinfo>(_Node_QNAME, Nodeinfo.class, null, value);
+    public JAXBElement<NodeInfo> createNode(NodeInfo value) {
+        return new JAXBElement<NodeInfo>(_Node_QNAME, NodeInfo.class, null, value);
     }
     
     @XmlElementDecl(namespace = "http://www.ezix.org", name = "list")
