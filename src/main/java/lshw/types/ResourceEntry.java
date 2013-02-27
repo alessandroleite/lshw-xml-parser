@@ -28,7 +28,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -64,13 +63,21 @@ public class ResourceEntry implements Serializable {
 	 * Serial code version <code>serialVersionUID<code>
 	 */
 	private static final long serialVersionUID = -3978556495645537385L;
-
-	@XmlValue
-	protected String value;
+	
 	@XmlAttribute(name = "type")
 	protected String type;
 	@XmlAttribute(name = "value")
-	protected String val;
+	protected String value;
+	
+	
+	public ResourceEntry() {
+		super();
+	}
+
+	public ResourceEntry(String type, String value) {
+		this.type = type;
+		this.value = value;
+	}
 
 	/**
 	 * Gets the value of the value property.
@@ -112,27 +119,6 @@ public class ResourceEntry implements Serializable {
 	 */
 	public void setType(String value) {
 		this.type = value;
-	}
-
-	/**
-	 * Gets the value of the val property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getVal() {
-		return val;
-	}
-
-	/**
-	 * Sets the value of the val property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setVal(String value) {
-		this.val = value;
 	}
 
 	/**

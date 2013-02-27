@@ -72,13 +72,13 @@ public class Capability implements Serializable, Cloneable,
 	public Capability() {
 	}
 
-	public Capability(Capability other) {
-		this(other.getId(), other.getValue());
-	}
-
 	public Capability(String id, String value) {
 		this.id = id;
 		this.value = value;
+	}
+	
+	public Capability(Capability other) {
+		this(other.getId(), other.getValue());
 	}
 
 	/**

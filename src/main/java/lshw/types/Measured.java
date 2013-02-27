@@ -68,6 +68,20 @@ public class Measured implements Serializable {
 	protected BigDecimal value;
 	@XmlAttribute(name = "units")
 	protected String units;
+	
+	public Measured(){
+		super();
+	}
+	
+	public Measured(BigDecimal value){
+		this.value = value;
+	}
+	
+	public Measured(BigDecimal value, String units) {
+		this(value);
+		this.units = units;
+	}
+	
 
 	/**
 	 * Gets the value of the value property.
