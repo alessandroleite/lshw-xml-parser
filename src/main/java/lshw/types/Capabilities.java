@@ -101,6 +101,18 @@ public class Capabilities implements Serializable, Iterable<Capability>, Cloneab
 		}
 		return this.capabilities;
 	}
+	
+	/**
+	 * Add a new {@link Capability}.
+	 * 
+	 * @param capability
+	 *            The {@link Capability} to be added.
+	 */
+	public void add(Capability capability) {
+		if (capability != null) {
+			this.getCapabilities().add(capability);
+		}
+	}
 
 	/**
 	 * Returns the capabilities as an unmodifiable {@link Map} where the key is
