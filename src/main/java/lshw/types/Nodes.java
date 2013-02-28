@@ -79,13 +79,13 @@ public class Nodes implements Iterable<NodeInfo>, Serializable {
 	/**
 	 * Return the {@link NodeInfo} that has a given id.
 	 * 
-	 * @param id
+	 * @param hardwareId
 	 *            The if of the {@link NodeInfo} to be returned.
 	 * @return <code>null</code> if the {@link Node} does not exist or the
 	 *         {@link NodeInfo} that has the given id.
 	 */
-	public NodeInfo getNodeById(String id) {
-		int index = this.getNodes().indexOf(NodeInfo.valueOf(id));
+	public NodeInfo findNodeByHardwareId(String hardwareId) {
+		int index = this.getNodes().indexOf(NodeInfo.valueOf(hardwareId));
 		return index < 0 ? null : this.getNodes().get(index);
 	}
 

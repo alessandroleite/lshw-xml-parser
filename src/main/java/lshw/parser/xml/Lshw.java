@@ -33,7 +33,7 @@ import lshw.types.Nodes;
 
 public class Lshw {
 
-	private static final String START_TAG = null;
+	private static final String START_TAG = "<list>";
 
 	/**
 	 * Parser a given XML and return the informations as list of
