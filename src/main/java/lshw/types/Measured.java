@@ -57,13 +57,13 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "measured", propOrder = { "value" })
-public class Measured implements Serializable {
+public class Measured implements Serializable, Cloneable {
 
 	/**
 	 * Serial code version <code>serialVersionUID<code>
 	 */
-	private static final long serialVersionUID = -6707441791766045053L;
-
+	private static final long serialVersionUID = 3570818139072544994L;
+	
 	@XmlValue
 	protected BigDecimal value;
 	@XmlAttribute(name = "units")
@@ -81,7 +81,6 @@ public class Measured implements Serializable {
 		this(value);
 		this.units = units;
 	}
-	
 
 	/**
 	 * Gets the value of the value property.
@@ -123,6 +122,14 @@ public class Measured implements Serializable {
 	 */
 	public void setUnits(String value) {
 		this.units = value;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Measured clone() {
+		return new Measured(this.getValue(), this.getUnits());
 	}
 
 	/**

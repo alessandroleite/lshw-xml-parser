@@ -63,7 +63,8 @@ public class Capability implements Serializable, Cloneable,
 	/**
 	 * Serial code version <code>serialVersionUID<code>
 	 */
-	private static final long serialVersionUID = -7358650020783737664L;
+	private static final long serialVersionUID = -2112685063662393925L;
+	
 	@XmlValue
 	protected String value;
 	@XmlAttribute(name = "id")
@@ -152,7 +153,7 @@ public class Capability implements Serializable, Cloneable,
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected Capability clone() {
+	public Capability clone() {
 		return new Capability(this);
 	}
 

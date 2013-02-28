@@ -59,14 +59,15 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "resinfo", propOrder = { "resources" })
-public class Resources implements Serializable, Iterable<ResourceEntry> {
+public class Resources implements Serializable, Iterable<ResourceEntry>,
+		Cloneable {
 
 	/**
 	 * Serial code version <code>serialVersionUID<code>
 	 */
-	private static final long serialVersionUID = -2853995430631934030L;
-
-	@XmlElement(required = true, name="resource")
+	private static final long serialVersionUID = 8937177092235325693L;
+	
+	@XmlElement(required = true, name = "resource")
 	protected List<ResourceEntry> resources;
 
 	/**
@@ -87,7 +88,8 @@ public class Resources implements Serializable, Iterable<ResourceEntry> {
 	 * 
 	 * 
 	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link ResourceEntry }
+	 * Objects of the following type(s) are allowed in the list
+	 * {@link ResourceEntry }
 	 * 
 	 * 
 	 */
@@ -102,11 +104,24 @@ public class Resources implements Serializable, Iterable<ResourceEntry> {
 	 * {@inheritDoc}
 	 */
 	@Override
+	protected Resources clone() {
+		Resources resources = new Resources();
+		
+		for (ResourceEntry resource : this.getResources()) {
+			resources.getResources().add(resource.clone());
+		}
+		return resources;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this,
 				ToStringStyle.MULTI_LINE_STYLE);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */

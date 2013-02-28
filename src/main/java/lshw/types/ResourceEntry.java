@@ -57,19 +57,18 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "resentry", propOrder = { "value" })
-public class ResourceEntry implements Serializable {
+public class ResourceEntry implements Serializable, Cloneable {
 
 	/**
 	 * Serial code version <code>serialVersionUID<code>
 	 */
-	private static final long serialVersionUID = -3978556495645537385L;
-	
+	private static final long serialVersionUID = 2370887504622224926L;
+
 	@XmlAttribute(name = "type")
 	protected String type;
 	@XmlAttribute(name = "value")
 	protected String value;
-	
-	
+
 	public ResourceEntry() {
 		super();
 	}
@@ -119,6 +118,14 @@ public class ResourceEntry implements Serializable {
 	 */
 	public void setType(String value) {
 		this.type = value;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public ResourceEntry clone() {
+		return new ResourceEntry(this.getType(), this.getValue());
 	}
 
 	/**

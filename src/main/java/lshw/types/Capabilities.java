@@ -62,7 +62,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "capinfo", propOrder = { "capabilities" })
-public class Capabilities implements Serializable, Iterable<Capability> {
+public class Capabilities implements Serializable, Iterable<Capability>, Cloneable {
 
 	/**
 	 * Serial code version <code>serialVersionUID<code>
@@ -116,6 +116,19 @@ public class Capabilities implements Serializable, Iterable<Capability> {
 			capabilities.put(capability.getId(), capability.getValue());
 		}
 		return Collections.unmodifiableMap(capabilities);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Capabilities clone() {
+		Capabilities capabilities = new Capabilities();
+		
+		for(Capability capability: this.getCapabilities()) {
+			capabilities.getCapabilities().add(capability.clone());
+		}
+		return capabilities;
 	}
 
 	/**
