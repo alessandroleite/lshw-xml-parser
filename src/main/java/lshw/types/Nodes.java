@@ -36,8 +36,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
-import com.sun.corba.se.impl.orbutil.graph.Node;
-
 @XmlRootElement(name = "list")
 @XmlAccessorType(value = XmlAccessType.FIELD)
 public class Nodes implements Iterable<NodeInfo>, Serializable {
