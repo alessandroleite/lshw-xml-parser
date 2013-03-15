@@ -78,7 +78,7 @@ public class Lshw {
 	 */
 	public static String marshall(Nodes nodes) {
 		try {
-			return new JaxbXmlParser<Nodes>(Nodes.class).marshall(nodes);
+			return new JaxbXmlParser<Nodes>(Nodes.class).marshal(nodes);
 		} catch (JAXBException exception) {
 			throw new LshwParserException(exception.getMessage(), exception);
 		}

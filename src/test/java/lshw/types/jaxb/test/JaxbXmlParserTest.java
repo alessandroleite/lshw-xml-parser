@@ -65,7 +65,7 @@ public class JaxbXmlParserTest {
 	@Test
 	public void must_marshal_two_nodes() throws JAXBException, IOException {
 		Nodes nodes = assert_that_xml_has_two_nodes(xml_file_text);
-		String nodes_xml = parser.marshall(nodes);
+		String nodes_xml = parser.marshal(nodes);
 		assert_that_xml_has_two_nodes(nodes_xml);
 	}
 	
