@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 Alessandro
+ * Copyright (c) 2013 Contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -19,33 +19,42 @@
  * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * Contributors:
+ *    Alessandro Ferreira Leite - the initial implementation.
  */
 package lshw.parser.exception;
 
-public class LshwParserException extends RuntimeException {
+public class LshwParserException extends RuntimeException
+{
 
-	/**
-	 * Serial code version <code>serialVersionUID</code>
-	 */
-	private static final long serialVersionUID = -8823256442322441501L;
+    /**
+     * Serial code version <code>serialVersionUID</code>
+     */
+    private static final long serialVersionUID = -8823256442322441501L;
 
-	public LshwParserException() {
-	}
+    public LshwParserException()
+    {
+        super();
+    }
 
-	public LshwParserException(String message) {
-		super(message);
-	}
+    public LshwParserException(String message)
+    {
+        super(message);
+    }
 
-	public LshwParserException(Throwable cause) {
-		super(cause);
-	}
+    public LshwParserException(Throwable cause)
+    {
+        super(cause);
+    }
 
-	public LshwParserException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    public LshwParserException(String message, Throwable cause)
+    {
+        super(message, cause);
+    }
 
-	public LshwParserException(String message, Throwable cause,
-			boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-	}
+    public LshwParserException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace)
+    {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
 }

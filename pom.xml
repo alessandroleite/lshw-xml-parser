@@ -1,16 +1,30 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>lshw</groupId>
 	<artifactId>xml-parser</artifactId>
 	<packaging>jar</packaging>
 	<version>0.5-SNAPSHOT</version>
-
 	<inceptionYear>2013</inceptionYear>
+	<name>lshw-xml-parser</name>
 
 	<description>
-	  XML parser of the lshw output. More information in http://ezix.org/project/wiki/HardwareLiSter#Howtointerpretlshwsoutput
+	  A XML parser for the lshw output. More information in http://ezix.org/project/wiki/HardwareLiSter#Howtointerpretlshwsoutput
     </description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<deploy-repo.url>file:///${env.DEFAULT_MAVEN_REPO_URL}</deploy-repo.url>
+		<junit.version>4.10</junit.version>
+		<commons-io.version>1.4</commons-io.version>
+		<log4j.version>1.2.17</log4j.version>
+		<commons-lang.version>2.6</commons-lang.version>
+		<java.source.version>1.7</java.source.version>
+		<license-header-file>${basedir}/license-header.txt</license-header-file>
+		<checkstyle.file>${project.basedir}/checkstyle.xml</checkstyle.file>
+	</properties>
 
 	<distributionManagement>
 		<repository>
@@ -30,8 +44,15 @@
 		<connection>scm:git:ssh://github.com/alessandroleite/lshw-xml-parser.git</connection>
 		<developerConnection>scm:git:git@github.com:alessandroleite/lshw-xml-parser.git</developerConnection>
 		<url>https://github.com/alessandroleite/lshw-xml-parser</url>
-	  <tag>HEAD</tag>
-  </scm>
+		<tag>HEAD</tag>
+	</scm>
+
+	<developers>
+		<developer>
+			<name>Alessandro Ferreira Leite</name>
+			<email>first-name[dot]last-name[dot]first-name[dot]cc</email>
+		</developer>
+	</developers>
 
 	<dependencies>
 
@@ -115,6 +136,15 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.10</version>
+				<configuration>
+					<configLocation>${checkstyle.file}</configLocation>
+					<headerLocation>${license-header-file}</headerLocation>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>2.5</version>
 				<configuration>
@@ -171,12 +201,13 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.0</version>
+				<version>3.1</version>
 				<configuration>
 					<encoding>${project.build.sourceEncoding}</encoding>
-					<source>${source.version}</source>
-					<target>${source.version}</target>
+					<source>${java.source.version}</source>
+					<target>${java.source.version}</target>
 					<showDeprecation>true</showDeprecation>
+					<XaddSerialVersionUID>true</XaddSerialVersionUID>
 					<compilerArgument>-Xlint:all</compilerArgument>
 				</configuration>
 			</plugin>
@@ -189,31 +220,36 @@
 						<projectnature>org.maven.ide.eclipse.maven2Nature</projectnature>
 						<projectnature>org.eclipse.jem.workbench.JavaEMFNature</projectnature>
 						<projectnature>org.eclipse.wst.jsdt.core.jsNature </projectnature>
+						<projectnature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</projectnature>
 					</additionalProjectnatures>
 					<additionalBuildcommands>
 						<buildcommand>org.maven.ide.eclipse.maven2Builder</buildcommand>
+						<buildcommand>com.atlassw.tools.eclipse.checkstyle.CheckstyleBuilder</buildcommand>
 						<forceRecheck>true</forceRecheck>
 					</additionalBuildcommands>
+					<additionalConfig>
+						<file>
+							<name>.checkstyle</name>
+							<content>
+							  <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+							<fileset-config file-format-version="1.2.0" simple-config="true" sync-formatter="true">
+							  <local-check-config name="${project.groupId}-checkstyle" location="${checkstyle.file}" type="external" description="">
+							    <additional-data name="protect-config-file" value="false"/>
+							  </local-check-config>
+							  <fileset name="all" enabled="true" check-config-name="${project.groupId}-checkstyle" local="true">
+							    <file-match-pattern match-pattern="." include-pattern="true"/>
+							  </fileset>
+							</fileset-config>
+					]]>
+							</content>
+						</file>
+					</additionalConfig>
 					<useProjectReferences>true</useProjectReferences>
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>
 					<encoding>${project.build.sourceEncoding}</encoding>
 					<projectNameTemplate>[groupId]-[artifactId]-[version]</projectNameTemplate>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>2.2.1</version>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>jar-no-fork</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -225,32 +261,7 @@
 					<autoVersionSubmodules>true</autoVersionSubmodules>
 				</configuration>
 			</plugin>
-			<!-- <plugin>
-				<groupId>com.qulice</groupId>
-				<artifactId>qulice-maven-plugin</artifactId>
-				<version>0.2.2</version>
-				<configuration>
-			        	<license>file:${license-header-file}</license>
-			        </configuration>
-				<executions>				
-					<execution>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>-->
 		</plugins>
 	</build>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<deploy-repo.url>file:///${env.DEFAULT_MAVEN_REPO_URL}</deploy-repo.url>
-		<junit.version>4.10</junit.version>
-		<commons-io.version>1.4</commons-io.version>
-		<log4j.version>1.2.17</log4j.version>
-		<commons-lang.version>2.6</commons-lang.version>
-		<source.version>1.7</source.version>
-		<license-header-file>${project.basedir}/License.txt</license-header-file>
-	</properties>
+
 </project>

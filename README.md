@@ -4,7 +4,26 @@
 What is it ?
 ------------
 
-XML parser for the lshw output.
+A XML parser for the [lshw][lshw] output.
+
+Usage
+--------------
+
+Parsing a XML file returned by the lshw command.
+
+   Nodes nodes = lshw.parser.xml.Lshw.unmarshall("/home/lshw-output-hardware-description.xml");
+
+Now, we can iterate through the nodes:
+
+   for (NodeInfo node: nodes)
+   { 
+      System.out.println(node);
+   }
+
+Or we can find a node by its id.
+
+   NodeInfo node = nodes.findNodeByHardwareId("1");
+   
 
 How to contribute
 --------------
@@ -25,6 +44,28 @@ To contribute, follow this steps:
 ## License 
 
 The project is licensed under the MIT license. 
-See License.txt for details.
+Copyright (c) 2013 Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Contributors:
+   Alessandro Ferreira Leite - the initial implementation.
 
 [lshw]:(http://ezix.org/project/wiki/HardwareLiSter)

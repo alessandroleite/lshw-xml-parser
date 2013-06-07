@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 Alessandro
+ * Copyright (c) 2013 Contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -19,6 +19,9 @@
  * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * Contributors:
+ *    Alessandro Ferreira Leite - the initial implementation.
  */
 package lshw.types;
 
@@ -39,8 +42,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * Java class for configentry complex type.
  * 
  * <p>
- * The following schema fragment specifies the expected content contained within
- * this class.
+ * The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="configentry">
@@ -57,114 +59,125 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "configentry", propOrder = { "value" })
-public class Configuration implements Serializable, Comparable<Configuration>, Cloneable {
+public class Configuration implements Serializable, Comparable<Configuration>, Cloneable
+{
 
-	/**
-	 * Serial code version <code>serialVersionUID<code>
-	 */
-	private static final long serialVersionUID = -6572183058835035501L;
+    /**
+     * Serial code version <code>serialVersionUID<code>
+     */
+    private static final long serialVersionUID = -6572183058835035501L;
 
-	@XmlAttribute(name = "id")
-	protected String id;
-	@XmlAttribute(name = "value")
-	protected String value;
-	
-	public Configuration() {
-		
-	}
+    @XmlAttribute(name = "id")
+    protected String id;
+    @XmlAttribute(name = "value")
+    protected String value;
 
-	public Configuration(String id) {
-		this.id = id;
-	}
+    public Configuration()
+    {
 
-	public Configuration(Configuration other) {
-		this(other.getId(), other.getValue());
-	}
+    }
 
-	public Configuration(String id, String value) {
-		this(id);
-		this.value = value;
-	}
+    public Configuration(String id)
+    {
+        this.id = id;
+    }
 
-	/**
-	 * Gets the value of the value property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getValue() {
-		return value;
-	}
+    public Configuration(Configuration other)
+    {
+        this(other.getId(), other.getValue());
+    }
 
-	/**
-	 * Sets the value of the value property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setValue(String value) {
-		this.value = value;
-	}
+    public Configuration(String id, String value)
+    {
+        this(id);
+        this.value = value;
+    }
 
-	/**
-	 * Gets the value of the id property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getId() {
-		return id;
-	}
+    /**
+     * Gets the value of the value property.
+     * 
+     * @return possible object is {@link String }
+     * 
+     */
+    public String getValue()
+    {
+        return value;
+    }
 
-	/**
-	 * Sets the value of the id property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setId(String value) {
-		this.id = value;
-	}
+    /**
+     * Sets the value of the value property.
+     * 
+     * @param value
+     *            allowed object is {@link String }
+     * 
+     */
+    public void setValue(String value)
+    {
+        this.value = value;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this,
-				new String[] { "value" });
-	}
+    /**
+     * Gets the value of the id property.
+     * 
+     * @return possible object is {@link String }
+     * 
+     */
+    public String getId()
+    {
+        return id;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		return EqualsBuilder.reflectionEquals(this, obj,
-				new String[] { "value" });
-	}
+    /**
+     * Sets the value of the id property.
+     * 
+     * @param value
+     *            allowed object is {@link String }
+     * 
+     */
+    public void setId(String value)
+    {
+        this.id = value;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this,
-				ToStringStyle.MULTI_LINE_STYLE);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode()
+    {
+        return HashCodeBuilder.reflectionHashCode(this, new String[] { "value" });
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int compareTo(Configuration other) {
-		return this.getId().compareTo(other.getId());
-	}
-	
-	@Override
-	public Configuration clone() {
-		return new Configuration(this);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj)
+    {
+        return EqualsBuilder.reflectionEquals(this, obj, new String[] { "value" });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString()
+    {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int compareTo(Configuration other)
+    {
+        return this.getId().compareTo(other.getId());
+    }
+
+    @Override
+    public Configuration clone()
+    {
+        return new Configuration(this);
+    }
 }

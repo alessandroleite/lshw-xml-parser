@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 Alessandro
+ * Copyright (c) 2013 Contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -19,6 +19,9 @@
  * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * Contributors:
+ *    Alessandro Ferreira Leite - the initial implementation.
  */
 package lshw.types;
 
@@ -39,8 +42,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * Java class for resentry complex type.
  * 
  * <p>
- * The following schema fragment specifies the expected content contained within
- * this class.
+ * The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="resentry">
@@ -57,99 +59,109 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "resentry", propOrder = { "value" })
-public class ResourceEntry implements Serializable, Cloneable {
+public class ResourceEntry implements Serializable, Cloneable
+{
 
-	/**
-	 * Serial code version <code>serialVersionUID<code>
-	 */
-	private static final long serialVersionUID = 2370887504622224926L;
+    /**
+     * Serial code version <code>serialVersionUID<code>
+     */
+    private static final long serialVersionUID = 2370887504622224926L;
 
-	@XmlAttribute(name = "type")
-	protected String type;
-	@XmlAttribute(name = "value")
-	protected String value;
+    @XmlAttribute(name = "type")
+    protected String type;
+    @XmlAttribute(name = "value")
+    protected String value;
 
-	public ResourceEntry() {
-		super();
-	}
+    public ResourceEntry()
+    {
+        super();
+    }
 
-	public ResourceEntry(String type, String value) {
-		this.type = type;
-		this.value = value;
-	}
+    public ResourceEntry(String type, String value)
+    {
+        this.type = type;
+        this.value = value;
+    }
 
-	/**
-	 * Gets the value of the value property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getValue() {
-		return value;
-	}
+    /**
+     * Gets the value of the value property.
+     * 
+     * @return possible object is {@link String }
+     * 
+     */
+    public String getValue()
+    {
+        return value;
+    }
 
-	/**
-	 * Sets the value of the value property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setValue(String value) {
-		this.value = value;
-	}
+    /**
+     * Sets the value of the value property.
+     * 
+     * @param value
+     *            allowed object is {@link String }
+     * 
+     */
+    public void setValue(String value)
+    {
+        this.value = value;
+    }
 
-	/**
-	 * Gets the value of the type property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getType() {
-		return type;
-	}
+    /**
+     * Gets the value of the type property.
+     * 
+     * @return possible object is {@link String }
+     * 
+     */
+    public String getType()
+    {
+        return type;
+    }
 
-	/**
-	 * Sets the value of the type property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setType(String value) {
-		this.type = value;
-	}
+    /**
+     * Sets the value of the type property.
+     * 
+     * @param value
+     *            allowed object is {@link String }
+     * 
+     */
+    public void setType(String value)
+    {
+        this.type = value;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public ResourceEntry clone() {
-		return new ResourceEntry(this.getType(), this.getValue());
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ResourceEntry clone()
+    {
+        return new ResourceEntry(this.getType(), this.getValue());
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode()
+    {
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		return EqualsBuilder.reflectionEquals(this, obj);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj)
+    {
+        return EqualsBuilder.reflectionEquals(this, obj);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this,
-				ToStringStyle.MULTI_LINE_STYLE);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString()
+    {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
 }

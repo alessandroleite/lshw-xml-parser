@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 Alessandro
+ * Copyright (c) 2013 Contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -19,6 +19,9 @@
  * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * Contributors:
+ *    Alessandro Ferreira Leite - the initial implementation.
  */
 package lshw.types.jaxb.test;
 
@@ -37,54 +40,64 @@ import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
 
-public class JaxbXmlParserTest {
+public class JaxbXmlParserTest
+{
+    private String xmlText_;
 
-	private String xml_file_text;
-	
-	private JaxbXmlParser<Nodes> parser;
+    private JaxbXmlParser<Nodes> parser_;
 
-	@Before
-	public void setUp() throws IOException, JAXBException {
-		
-		StringBuilder sb = new StringBuilder();
-		try (InputStream is = getDefaultClassLoader().getResourceAsStream("example-network-output.xml")) {
-			for (Object line : IOUtils.readLines(is)) {
-				sb.append(line).append("\n");
-			}
-		}
+    @Before
+    public void setUp() throws IOException, JAXBException
+    {
+        StringBuilder sb = new StringBuilder();
+        try (InputStream is = getDefaultClassLoader().getResourceAsStream("example-network-output.xml"))
+        {
+            for (Object line : IOUtils.readLines(is))
+            {
+                sb.append(line).append("\n");
+            }
+        }
 
-		xml_file_text = sb.toString();
-		parser = new JaxbXmlParser<>(Nodes.class);
-	}
+        xmlText_ = sb.toString();
+        parser_ = new JaxbXmlParser<>(Nodes.class);
+    }
 
-	@Test
-	public void must_unmarshal_two_nodes() throws JAXBException, IOException {
-		assert_that_xml_has_two_nodes(xml_file_text);
-	}
-	
-	@Test
-	public void must_marshal_two_nodes() throws JAXBException, IOException {
-		Nodes nodes = assert_that_xml_has_two_nodes(xml_file_text);
-		String nodes_xml = parser.marshal(nodes);
-		assert_that_xml_has_two_nodes(nodes_xml);
-	}
-	
-	Nodes assert_that_xml_has_two_nodes(String xml) throws JAXBException, IOException{
-		Nodes nodes = parser.unmarshal(xml);
-		assertNotNull(nodes);
-		assertEquals(2, nodes.getNodes().size());
-		return nodes;
-	}
+    @Test
+    public void must_unmarshal_two_nodes() throws JAXBException, IOException
+    {
+        assert_that_xml_has_two_nodes(xmlText_);
+    }
 
-	static ClassLoader getDefaultClassLoader() {
-		ClassLoader cl = null;
-		try {
-			cl = Thread.currentThread().getContextClassLoader();
-		} catch (Throwable ignore) {
-		}
-		if (cl == null) {
-			cl = JaxbXmlParserTest.class.getClassLoader();
-		}
-		return cl;
-	}
+    @Test
+    public void must_marshal_two_nodes() throws JAXBException, IOException
+    {
+        Nodes nodes = assert_that_xml_has_two_nodes(xmlText_);
+        String nodes_xml = parser_.marshal(nodes);
+        assert_that_xml_has_two_nodes(nodes_xml);
+    }
+
+    Nodes assert_that_xml_has_two_nodes(String xml) throws JAXBException, IOException
+    {
+        Nodes nodes = parser_.unmarshal(xml);
+        assertNotNull(nodes);
+        assertEquals(2, nodes.getNodes().size());
+        return nodes;
+    }
+
+    static ClassLoader getDefaultClassLoader()
+    {
+        ClassLoader cl = null;
+        try
+        {
+            cl = Thread.currentThread().getContextClassLoader();
+        }
+        catch (Throwable ignore)
+        {
+        }
+        if (cl == null)
+        {
+            cl = JaxbXmlParserTest.class.getClassLoader();
+        }
+        return cl;
+    }
 }

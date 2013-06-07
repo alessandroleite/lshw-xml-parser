@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 Alessandro
+ * Copyright (c) 2013 Contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -19,6 +19,9 @@
  * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * Contributors:
+ *    Alessandro Ferreira Leite - the initial implementation.
  */
 package lshw.types;
 
@@ -43,8 +46,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * Java class for capinfo complex type.
  * 
  * <p>
- * The following schema fragment specifies the expected content contained within
- * this class.
+ * The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="capinfo">
@@ -62,101 +64,106 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "capinfo", propOrder = { "capabilities" })
-public class Capabilities implements Serializable, Iterable<Capability>, Cloneable {
+public class Capabilities implements Serializable, Iterable<Capability>, Cloneable
+{
 
-	/**
-	 * Serial code version <code>serialVersionUID<code>
-	 */
-	private static final long serialVersionUID = 2623565505511049386L;
+    /**
+     * Serial code version <code>serialVersionUID<code>
+     */
+    private static final long serialVersionUID = 2623565505511049386L;
 
-	@XmlElement(required = true, name = "capability")
-	protected List<Capability> capabilities;
+    @XmlElement(required = true, name = "capability")
+    protected List<Capability> capabilities;
 
-	/**
-	 * Gets the value of the capability property.
-	 * 
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the capability property.
-	 * 
-	 * <p>
-	 * For example, to add a new item, do as follows:
-	 * 
-	 * <pre>
-	 * getCapability().add(newItem);
-	 * </pre>
-	 * 
-	 * 
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list
-	 * {@link Capability }
-	 * 
-	 * 
-	 */
-	public List<Capability> getCapabilities() {
-		if (capabilities == null) {
-			capabilities = new ArrayList<Capability>();
-		}
-		return this.capabilities;
-	}
-	
-	/**
-	 * Add a new {@link Capability}.
-	 * 
-	 * @param capability
-	 *            The {@link Capability} to be added.
-	 */
-	public void add(Capability capability) {
-		if (capability != null) {
-			this.getCapabilities().add(capability);
-		}
-	}
+    /**
+     * Gets the value of the capability property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned list will be
+     * present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the capability property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * 
+     * <pre>
+     * getCapability().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link Capability }
+     * 
+     * 
+     */
+    public List<Capability> getCapabilities()
+    {
+        if (capabilities == null)
+        {
+            capabilities = new ArrayList<Capability>();
+        }
+        return this.capabilities;
+    }
 
-	/**
-	 * Returns the capabilities as an unmodifiable {@link Map} where the key is
-	 * the capability id and the value is the capability value.
-	 * 
-	 * @return the capabilities as an unmodifiable {@link Map} where the key is
-	 *         the capability id and the value is the capability value.
-	 */
-	public Map<String, String> getCapabilitiesMap() {
-		Map<String, String> capabilities = new HashMap<>();
+    /**
+     * Add a new {@link Capability}.
+     * 
+     * @param capability
+     *            The {@link Capability} to be added.
+     */
+    public void add(Capability capability)
+    {
+        if (capability != null)
+        {
+            this.getCapabilities().add(capability);
+        }
+    }
 
-		for (Capability capability : this.getCapabilities()) {
-			capabilities.put(capability.getId(), capability.getValue());
-		}
-		return Collections.unmodifiableMap(capabilities);
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Capabilities clone() {
-		Capabilities capabilities = new Capabilities();
-		
-		for(Capability capability: this.getCapabilities()) {
-			capabilities.getCapabilities().add(capability.clone());
-		}
-		return capabilities;
-	}
+    /**
+     * Returns the capabilities as an unmodifiable {@link Map} where the key is the capability id and the value is the capability value.
+     * 
+     * @return the capabilities as an unmodifiable {@link Map} where the key is the capability id and the value is the capability value.
+     */
+    public Map<String, String> getCapabilitiesMap()
+    {
+        Map<String, String> capabilities = new HashMap<>();
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this,
-				ToStringStyle.MULTI_LINE_STYLE);
-	}
+        for (Capability capability : this.getCapabilities())
+        {
+            capabilities.put(capability.getId(), capability.getValue());
+        }
+        return Collections.unmodifiableMap(capabilities);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Iterator<Capability> iterator() {
-		return this.getCapabilities().iterator();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Capabilities clone()
+    {
+        Capabilities capabilities = new Capabilities();
+
+        for (Capability capability : this.getCapabilities())
+        {
+            capabilities.getCapabilities().add(capability.clone());
+        }
+        return capabilities;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString()
+    {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Iterator<Capability> iterator()
+    {
+        return this.getCapabilities().iterator();
+    }
 }

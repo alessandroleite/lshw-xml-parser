@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 Alessandro
+ * Copyright (c) 2013 Contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -19,6 +19,9 @@
  * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * Contributors:
+ *    Alessandro Ferreira Leite - the initial implementation.
  */
 package lshw.types;
 
@@ -27,40 +30,36 @@ import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
 
-
 /**
- * This object contains factory methods for each 
- * Java content interface and Java element interface 
- * generated in the lshw.types package. 
- * <p>An ObjectFactory allows you to programatically 
- * construct new instances of the Java representation 
- * for XML content. The Java representation of XML 
- * content can consist of schema derived interfaces 
- * and classes representing the binding of schema 
- * type definitions, element declarations and model 
- * groups.  Factory methods for each of these are 
- * provided in this class.
+ * This object contains factory methods for each Java content interface and Java element interface generated in the lshw.types package.
+ * <p>
+ * An ObjectFactory allows you to programatically construct new instances of the Java representation for XML content. The Java representation of XML
+ * content can consist of schema derived interfaces and classes representing the binding of schema type definitions, element declarations and model
+ * groups. Factory methods for each of these are provided in this class.
  * 
  */
 @XmlRegistry
-public class ObjectFactory {
+public class ObjectFactory
+{
 
     private final static QName _Node_QNAME = new QName("http://www.ezix.org", "node");
-    
+
     private final static QName _List_QNAME = new QName("http://www.ezix.org", "list");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: lshw.types
      * 
      */
-    public ObjectFactory() {
+    public ObjectFactory()
+    {
     }
-    
+
     /**
      * Create an instance of {@link Nodes }
      * 
      */
-    public Nodes createNodes() {
+    public Nodes createNodes()
+    {
         return new Nodes();
     }
 
@@ -68,7 +67,8 @@ public class ObjectFactory {
      * Create an instance of {@link NodeInfo }
      * 
      */
-    public NodeInfo createNodeinfo() {
+    public NodeInfo createNodeinfo()
+    {
         return new NodeInfo();
     }
 
@@ -76,7 +76,8 @@ public class ObjectFactory {
      * Create an instance of {@link Configurations }
      * 
      */
-    public Configurations createConfiginfo() {
+    public Configurations createConfiginfo()
+    {
         return new Configurations();
     }
 
@@ -84,7 +85,8 @@ public class ObjectFactory {
      * Create an instance of {@link Capability }
      * 
      */
-    public Capability createCapentry() {
+    public Capability createCapentry()
+    {
         return new Capability();
     }
 
@@ -92,7 +94,8 @@ public class ObjectFactory {
      * Create an instance of {@link Capabilities }
      * 
      */
-    public Capabilities createCapinfo() {
+    public Capabilities createCapinfo()
+    {
         return new Capabilities();
     }
 
@@ -100,7 +103,8 @@ public class ObjectFactory {
      * Create an instance of {@link Measured }
      * 
      */
-    public Measured createMeasured() {
+    public Measured createMeasured()
+    {
         return new Measured();
     }
 
@@ -108,7 +112,8 @@ public class ObjectFactory {
      * Create an instance of {@link Resources }
      * 
      */
-    public Resources createResinfo() {
+    public Resources createResinfo()
+    {
         return new Resources();
     }
 
@@ -116,7 +121,8 @@ public class ObjectFactory {
      * Create an instance of {@link Configuration }
      * 
      */
-    public Configuration createConfigentry() {
+    public Configuration createConfigentry()
+    {
         return new Configuration();
     }
 
@@ -124,20 +130,23 @@ public class ObjectFactory {
      * Create an instance of {@link ResourceEntry }
      * 
      */
-    public ResourceEntry createResentry() {
+    public ResourceEntry createResentry()
+    {
         return new ResourceEntry();
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link NodeInfo }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link NodeInfo }{@code >}
      */
     @XmlElementDecl(namespace = "http://www.ezix.org", name = "node")
-    public JAXBElement<NodeInfo> createNode(NodeInfo value) {
+    public JAXBElement<NodeInfo> createNode(NodeInfo value)
+    {
         return new JAXBElement<NodeInfo>(_Node_QNAME, NodeInfo.class, null, value);
     }
-    
+
     @XmlElementDecl(namespace = "http://www.ezix.org", name = "list")
-    public JAXBElement<Nodes> createList(Nodes value) {
+    public JAXBElement<Nodes> createList(Nodes value)
+    {
         return new JAXBElement<Nodes>(_List_QNAME, Nodes.class, null, value);
     }
 }

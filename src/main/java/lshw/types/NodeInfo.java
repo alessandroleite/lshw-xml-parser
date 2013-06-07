@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 Alessandro
+ * Copyright (c) 2013 Contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -19,6 +19,9 @@
  * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * Contributors:
+ *    Alessandro Ferreira Leite - the initial implementation.
  */
 package lshw.types;
 
@@ -39,8 +42,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * Java class for nodeinfo complex type.
  * 
  * <p>
- * The following schema fragment specifies the expected content contained within
- * this class.
+ * The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="nodeinfo">
@@ -77,578 +79,631 @@ import org.apache.commons.lang.builder.ToStringStyle;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "nodeinfo", propOrder = { "description", "product", "vendor",
-		"physId", "version", "serial", "busInfo", "slot", "size", "capacity",
-		"clock", "width", "configuration", "capabilities", "resources", "node", "logicalName" })
-public class NodeInfo {
+@XmlType(name = "nodeinfo", propOrder = { "description", "product", "vendor", "physId", "version", "serial", "busInfo", "slot", "size", "capacity",
+        "clock", "width", "configuration", "capabilities", "resources", "node", "logicalName" })
+public class NodeInfo
+{
 
-	@XmlElement(required = true)
-	protected String description;
-	@XmlElement(required = true)
-	protected String product;
-	@XmlElement(required = true)
-	protected String vendor;
-	@XmlElement(required = true, name="physid")
-	protected String physId;
-	@XmlElement(required = true)
-	protected String version;
-	@XmlElement(required = true)
-	protected String serial;
-	@XmlElement(required = true, name = "businfo")
-	protected String busInfo;
-	@XmlElement(required = true)
-	protected String slot;
-	@XmlElement(required = true)
-	protected Measured size;
-	@XmlElement(required = true)
-	protected Measured capacity;
-	@XmlElement(required = true)
-	protected Measured clock;
-	@XmlElement(required = true)
-	protected Measured width;
-	@XmlElement(required = true)
-	protected Configurations configuration;
-	@XmlElement(required = true)
-	protected Capabilities capabilities;
-	@XmlElement(required = true)
-	protected Resources resources;
-	@XmlElement(required = true)
-	protected List<NodeInfo> node;
-	@XmlAttribute(name = "id")
-	protected String id;
-	@XmlAttribute(name = "handle")
-	protected String handle;
-	@XmlAttribute(name = "class")
-	protected String clazz;
-	@XmlAttribute(name = "claimed")
-	protected Boolean claimed;
-	@XmlAttribute(name = "disabled")
-	protected Boolean disabled;
-	@XmlAttribute(name = "logicalname")
-	protected String logicalName;
-	
-	
-	public NodeInfo(){
-		super();
-	}
-	
-	public NodeInfo(String hardwareId){
-		this.serial = hardwareId;
-	}
+    @XmlElement(required = true)
+    protected String description;
+    @XmlElement(required = true)
+    protected String product;
+    @XmlElement(required = true)
+    protected String vendor;
+    @XmlElement(required = true, name = "physid")
+    protected String physId;
+    @XmlElement(required = true)
+    protected String version;
+    @XmlElement(required = true)
+    protected String serial;
+    @XmlElement(required = true, name = "businfo")
+    protected String busInfo;
+    @XmlElement(required = true)
+    protected String slot;
+    @XmlElement(required = true)
+    protected Measured size;
+    @XmlElement(required = true)
+    protected Measured capacity;
+    @XmlElement(required = true)
+    protected Measured clock;
+    @XmlElement(required = true)
+    protected Measured width;
+    @XmlElement(required = true)
+    protected Configurations configuration;
+    @XmlElement(required = true)
+    protected Capabilities capabilities;
+    @XmlElement(required = true)
+    protected Resources resources;
+    @XmlElement(required = true)
+    protected List<NodeInfo> node;
+    @XmlAttribute(name = "id")
+    protected String id;
+    @XmlAttribute(name = "handle")
+    protected String handle;
+    @XmlAttribute(name = "class")
+    protected String clazz;
+    @XmlAttribute(name = "claimed")
+    protected Boolean claimed;
+    @XmlAttribute(name = "disabled")
+    protected Boolean disabled;
+    @XmlAttribute(name = "logicalname")
+    protected String logicalName;
 
-	public static NodeInfo valueOf(String hardwareId){
-		return new NodeInfo(hardwareId);
-	}
+    public NodeInfo()
+    {
+        super();
+    }
 
-	/**
-	 * Gets the value of the description property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getDescription() {
-		return description;
-	}
+    public NodeInfo(String hardwareId)
+    {
+        this.serial = hardwareId;
+    }
 
-	/**
-	 * Sets the value of the description property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setDescription(String value) {
-		this.description = value;
-	}
+    public static NodeInfo valueOf(String hardwareId)
+    {
+        return new NodeInfo(hardwareId);
+    }
 
-	/**
-	 * Gets the value of the product property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getProduct() {
-		return product;
-	}
+    /**
+     * Gets the value of the description property.
+     * 
+     * @return possible object is {@link String }
+     * 
+     */
+    public String getDescription()
+    {
+        return description;
+    }
 
-	/**
-	 * Sets the value of the product property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setProduct(String value) {
-		this.product = value;
-	}
+    /**
+     * Sets the value of the description property.
+     * 
+     * @param value
+     *            allowed object is {@link String }
+     * 
+     */
+    public void setDescription(String value)
+    {
+        this.description = value;
+    }
 
-	/**
-	 * Gets the value of the vendor property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getVendor() {
-		return vendor;
-	}
+    /**
+     * Gets the value of the product property.
+     * 
+     * @return possible object is {@link String }
+     * 
+     */
+    public String getProduct()
+    {
+        return product;
+    }
 
-	/**
-	 * Sets the value of the vendor property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setVendor(String value) {
-		this.vendor = value;
-	}
+    /**
+     * Sets the value of the product property.
+     * 
+     * @param value
+     *            allowed object is {@link String }
+     * 
+     */
+    public void setProduct(String value)
+    {
+        this.product = value;
+    }
 
-	/**
-	 * Gets the value of the physId property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getPhysId() {
-		return physId;
-	}
+    /**
+     * Gets the value of the vendor property.
+     * 
+     * @return possible object is {@link String }
+     * 
+     */
+    public String getVendor()
+    {
+        return vendor;
+    }
 
-	/**
-	 * Sets the value of the physid property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setPhysId(String value) {
-		this.physId = value;
-	}
+    /**
+     * Sets the value of the vendor property.
+     * 
+     * @param value
+     *            allowed object is {@link String }
+     * 
+     */
+    public void setVendor(String value)
+    {
+        this.vendor = value;
+    }
 
-	/**
-	 * Gets the value of the version property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getVersion() {
-		return version;
-	}
+    /**
+     * Gets the value of the physId property.
+     * 
+     * @return possible object is {@link String }
+     * 
+     */
+    public String getPhysId()
+    {
+        return physId;
+    }
 
-	/**
-	 * Sets the value of the version property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setVersion(String value) {
-		this.version = value;
-	}
+    /**
+     * Sets the value of the physid property.
+     * 
+     * @param value
+     *            allowed object is {@link String }
+     * 
+     */
+    public void setPhysId(String value)
+    {
+        this.physId = value;
+    }
 
-	/**
-	 * Gets the value of the serial property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getSerial() {
-		return serial;
-	}
+    /**
+     * Gets the value of the version property.
+     * 
+     * @return possible object is {@link String }
+     * 
+     */
+    public String getVersion()
+    {
+        return version;
+    }
 
-	/**
-	 * Sets the value of the serial property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setSerial(String value) {
-		this.serial = value;
-	}
+    /**
+     * Sets the value of the version property.
+     * 
+     * @param value
+     *            allowed object is {@link String }
+     * 
+     */
+    public void setVersion(String value)
+    {
+        this.version = value;
+    }
 
-	/**
-	 * Gets the value of the businfo property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getBusInfo() {
-		return busInfo;
-	}
+    /**
+     * Gets the value of the serial property.
+     * 
+     * @return possible object is {@link String }
+     * 
+     */
+    public String getSerial()
+    {
+        return serial;
+    }
 
-	/**
-	 * Sets the value of the businfo property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setBusInfo(String value) {
-		this.busInfo = value;
-	}
+    /**
+     * Sets the value of the serial property.
+     * 
+     * @param value
+     *            allowed object is {@link String }
+     * 
+     */
+    public void setSerial(String value)
+    {
+        this.serial = value;
+    }
 
-	/**
-	 * Gets the value of the slot property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getSlot() {
-		return slot;
-	}
+    /**
+     * Gets the value of the businfo property.
+     * 
+     * @return possible object is {@link String }
+     * 
+     */
+    public String getBusInfo()
+    {
+        return busInfo;
+    }
 
-	/**
-	 * Sets the value of the slot property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setSlot(String value) {
-		this.slot = value;
-	}
+    /**
+     * Sets the value of the businfo property.
+     * 
+     * @param value
+     *            allowed object is {@link String }
+     * 
+     */
+    public void setBusInfo(String value)
+    {
+        this.busInfo = value;
+    }
 
-	/**
-	 * Gets the value of the size property.
-	 * 
-	 * @return possible object is {@link Measured }
-	 * 
-	 */
-	public Measured getSize() {
-		return size;
-	}
+    /**
+     * Gets the value of the slot property.
+     * 
+     * @return possible object is {@link String }
+     * 
+     */
+    public String getSlot()
+    {
+        return slot;
+    }
 
-	/**
-	 * Sets the value of the size property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link Measured }
-	 * 
-	 */
-	public void setSize(Measured value) {
-		this.size = value;
-	}
+    /**
+     * Sets the value of the slot property.
+     * 
+     * @param value
+     *            allowed object is {@link String }
+     * 
+     */
+    public void setSlot(String value)
+    {
+        this.slot = value;
+    }
 
-	/**
-	 * Gets the value of the capacity property.
-	 * 
-	 * @return possible object is {@link Measured }
-	 * 
-	 */
-	public Measured getCapacity() {
-		return capacity;
-	}
+    /**
+     * Gets the value of the size property.
+     * 
+     * @return possible object is {@link Measured }
+     * 
+     */
+    public Measured getSize()
+    {
+        return size;
+    }
 
-	/**
-	 * Sets the value of the capacity property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link Measured }
-	 * 
-	 */
-	public void setCapacity(Measured value) {
-		this.capacity = value;
-	}
+    /**
+     * Sets the value of the size property.
+     * 
+     * @param value
+     *            allowed object is {@link Measured }
+     * 
+     */
+    public void setSize(Measured value)
+    {
+        this.size = value;
+    }
 
-	/**
-	 * Gets the value of the clock property.
-	 * 
-	 * @return possible object is {@link Measured }
-	 * 
-	 */
-	public Measured getClock() {
-		return clock;
-	}
+    /**
+     * Gets the value of the capacity property.
+     * 
+     * @return possible object is {@link Measured }
+     * 
+     */
+    public Measured getCapacity()
+    {
+        return capacity;
+    }
 
-	/**
-	 * Sets the value of the clock property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link Measured }
-	 * 
-	 */
-	public void setClock(Measured value) {
-		this.clock = value;
-	}
+    /**
+     * Sets the value of the capacity property.
+     * 
+     * @param value
+     *            allowed object is {@link Measured }
+     * 
+     */
+    public void setCapacity(Measured value)
+    {
+        this.capacity = value;
+    }
 
-	/**
-	 * Gets the value of the width property.
-	 * 
-	 * @return possible object is {@link Measured }
-	 * 
-	 */
-	public Measured getWidth() {
-		return width;
-	}
+    /**
+     * Gets the value of the clock property.
+     * 
+     * @return possible object is {@link Measured }
+     * 
+     */
+    public Measured getClock()
+    {
+        return clock;
+    }
 
-	/**
-	 * Sets the value of the width property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link Measured }
-	 * 
-	 */
-	public void setWidth(Measured value) {
-		this.width = value;
-	}
+    /**
+     * Sets the value of the clock property.
+     * 
+     * @param value
+     *            allowed object is {@link Measured }
+     * 
+     */
+    public void setClock(Measured value)
+    {
+        this.clock = value;
+    }
 
-	/**
-	 * Gets the value of the configuration property.
-	 * 
-	 * @return possible object is {@link Configurations }
-	 * 
-	 */
-	public Configurations getConfiguration() {
-		return configuration;
-	}
+    /**
+     * Gets the value of the width property.
+     * 
+     * @return possible object is {@link Measured }
+     * 
+     */
+    public Measured getWidth()
+    {
+        return width;
+    }
 
-	/**
-	 * Sets the value of the configuration property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link Configurations }
-	 * 
-	 */
-	public void setConfiguration(Configurations value) {
-		this.configuration = value;
-	}
+    /**
+     * Sets the value of the width property.
+     * 
+     * @param value
+     *            allowed object is {@link Measured }
+     * 
+     */
+    public void setWidth(Measured value)
+    {
+        this.width = value;
+    }
 
-	/**
-	 * Gets the value of the capabilities property.
-	 * 
-	 * @return possible object is {@link Capabilities }
-	 * 
-	 */
-	public Capabilities getCapabilities() {
-		return capabilities;
-	}
+    /**
+     * Gets the value of the configuration property.
+     * 
+     * @return possible object is {@link Configurations }
+     * 
+     */
+    public Configurations getConfiguration()
+    {
+        return configuration;
+    }
 
-	/**
-	 * Sets the value of the capabilities property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link Capabilities }
-	 * 
-	 */
-	public void setCapabilities(Capabilities value) {
-		this.capabilities = value;
-	}
+    /**
+     * Sets the value of the configuration property.
+     * 
+     * @param value
+     *            allowed object is {@link Configurations }
+     * 
+     */
+    public void setConfiguration(Configurations value)
+    {
+        this.configuration = value;
+    }
 
-	/**
-	 * Gets the value of the resources property.
-	 * 
-	 * @return possible object is {@link Resources }
-	 * 
-	 */
-	public Resources getResources() {
-		return resources;
-	}
+    /**
+     * Gets the value of the capabilities property.
+     * 
+     * @return possible object is {@link Capabilities }
+     * 
+     */
+    public Capabilities getCapabilities()
+    {
+        return capabilities;
+    }
 
-	/**
-	 * Sets the value of the resources property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link Resources }
-	 * 
-	 */
-	public void setResources(Resources value) {
-		this.resources = value;
-	}
+    /**
+     * Sets the value of the capabilities property.
+     * 
+     * @param value
+     *            allowed object is {@link Capabilities }
+     * 
+     */
+    public void setCapabilities(Capabilities value)
+    {
+        this.capabilities = value;
+    }
 
-	/**
-	 * Gets the value of the node property.
-	 * 
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a
-	 * snapshot. Therefore any modification you make to the returned list will
-	 * be present inside the JAXB object. This is why there is not a
-	 * <CODE>set</CODE> method for the node property.
-	 * 
-	 * <p>
-	 * For example, to add a new item, do as follows:
-	 * 
-	 * <pre>
-	 * getNode().add(newItem);
-	 * </pre>
-	 * 
-	 * 
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link NodeInfo }
-	 * 
-	 * 
-	 */
-	public List<NodeInfo> getNode() {
-		if (node == null) {
-			node = new ArrayList<NodeInfo>();
-		}
-		return this.node;
-	}
+    /**
+     * Gets the value of the resources property.
+     * 
+     * @return possible object is {@link Resources }
+     * 
+     */
+    public Resources getResources()
+    {
+        return resources;
+    }
 
-	/**
-	 * Gets the value of the id property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getId() {
-		return id;
-	}
+    /**
+     * Sets the value of the resources property.
+     * 
+     * @param value
+     *            allowed object is {@link Resources }
+     * 
+     */
+    public void setResources(Resources value)
+    {
+        this.resources = value;
+    }
 
-	/**
-	 * Sets the value of the id property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setId(String value) {
-		this.id = value;
-	}
+    /**
+     * Gets the value of the node property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned list will be
+     * present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the node property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * 
+     * <pre>
+     * getNode().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list {@link NodeInfo }
+     * 
+     * 
+     */
+    public List<NodeInfo> getNode()
+    {
+        if (node == null)
+        {
+            node = new ArrayList<NodeInfo>();
+        }
+        return this.node;
+    }
 
-	/**
-	 * Gets the value of the handle property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getHandle() {
-		return handle;
-	}
+    /**
+     * Gets the value of the id property.
+     * 
+     * @return possible object is {@link String }
+     * 
+     */
+    public String getId()
+    {
+        return id;
+    }
 
-	/**
-	 * Sets the value of the handle property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setHandle(String value) {
-		this.handle = value;
-	}
+    /**
+     * Sets the value of the id property.
+     * 
+     * @param value
+     *            allowed object is {@link String }
+     * 
+     */
+    public void setId(String value)
+    {
+        this.id = value;
+    }
 
-	/**
-	 * Gets the value of the clazz property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getClazz() {
-		return clazz;
-	}
+    /**
+     * Gets the value of the handle property.
+     * 
+     * @return possible object is {@link String }
+     * 
+     */
+    public String getHandle()
+    {
+        return handle;
+    }
 
-	/**
-	 * Sets the value of the clazz property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setClazz(String value) {
-		this.clazz = value;
-	}
+    /**
+     * Sets the value of the handle property.
+     * 
+     * @param value
+     *            allowed object is {@link String }
+     * 
+     */
+    public void setHandle(String value)
+    {
+        this.handle = value;
+    }
 
-	/**
-	 * Gets the value of the claimed property.
-	 * 
-	 * @return possible object is {@link Boolean }
-	 * 
-	 */
-	public Boolean isClaimed() {
-		return claimed;
-	}
+    /**
+     * Gets the value of the clazz property.
+     * 
+     * @return possible object is {@link String }
+     * 
+     */
+    public String getClazz()
+    {
+        return clazz;
+    }
 
-	/**
-	 * Sets the value of the claimed property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link Boolean }
-	 * 
-	 */
-	public void setClaimed(Boolean value) {
-		this.claimed = value;
-	}
+    /**
+     * Sets the value of the clazz property.
+     * 
+     * @param value
+     *            allowed object is {@link String }
+     * 
+     */
+    public void setClazz(String value)
+    {
+        this.clazz = value;
+    }
 
-	/**
-	 * Gets the value of the disabled property.
-	 * 
-	 * @return possible object is {@link Boolean }
-	 * 
-	 */
-	public Boolean isDisabled() {
-		return disabled;
-	}
+    /**
+     * Gets the value of the claimed property.
+     * 
+     * @return possible object is {@link Boolean }
+     * 
+     */
+    public Boolean isClaimed()
+    {
+        return claimed;
+    }
 
-	/**
-	 * Sets the value of the disabled property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link Boolean }
-	 * 
-	 */
-	public void setDisabled(Boolean value) {
-		this.disabled = value;
-	}
-	
+    /**
+     * Sets the value of the claimed property.
+     * 
+     * @param value
+     *            allowed object is {@link Boolean }
+     * 
+     */
+    public void setClaimed(Boolean value)
+    {
+        this.claimed = value;
+    }
 
-	/**
-	 * @return the logicalName
-	 */
-	public String getLogicalName() {
-		return logicalName;
-	}
+    /**
+     * Gets the value of the disabled property.
+     * 
+     * @return possible object is {@link Boolean }
+     * 
+     */
+    public Boolean isDisabled()
+    {
+        return disabled;
+    }
 
-	/**
-	 * @param logicalName the logicalName to set
-	 */
-	public void setLogicalName(String logicalName) {
-		this.logicalName = logicalName;
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((serial == null) ? 0 : serial.hashCode());
-		return result;
-	}
+    /**
+     * Sets the value of the disabled property.
+     * 
+     * @param value
+     *            allowed object is {@link Boolean }
+     * 
+     */
+    public void setDisabled(Boolean value)
+    {
+        this.disabled = value;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		
-		if (obj == null) {
-			return false;
-		}
-		
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		
-		NodeInfo other = (NodeInfo) obj;
-		if (serial == null) {
-			if (other.serial != null) {
-				return false;
-			}
-		} else if (!serial.equals(other.serial)) {
-			return false;
-		}
-		return true;
-	}
+    /**
+     * @return the logicalName
+     */
+    public String getLogicalName()
+    {
+        return logicalName;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this,
-				ToStringStyle.MULTI_LINE_STYLE);
-	}
+    /**
+     * @param logicalName
+     *            the logicalName to set
+     */
+    public void setLogicalName(String logicalName)
+    {
+        this.logicalName = logicalName;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((serial == null) ? 0 : serial.hashCode());
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+        {
+            return true;
+        }
+
+        if (obj == null)
+        {
+            return false;
+        }
+
+        if (getClass() != obj.getClass())
+        {
+            return false;
+        }
+
+        NodeInfo other = (NodeInfo) obj;
+        if (serial == null)
+        {
+            if (other.serial != null)
+            {
+                return false;
+            }
+        }
+        else if (!serial.equals(other.serial))
+        {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString()
+    {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
 }

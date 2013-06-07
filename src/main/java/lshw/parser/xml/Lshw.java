@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 Alessandro
+ * Copyright (c) 2013 Contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -19,6 +19,9 @@
  * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * Contributors:
+ *    Alessandro Ferreira Leite - the initial implementation.
  */
 package lshw.parser.xml;
 
@@ -31,72 +34,89 @@ import lshw.parser.xml.jaxb.JaxbXmlParser;
 import lshw.types.NodeInfo;
 import lshw.types.Nodes;
 
-public class Lshw {
+public final class Lshw
+{
+    private static final String START_TAG = "<list>";
 
-	private static final String START_TAG = "<list>";
+    /**
+     * Private constructor to avoid instance of this class.
+     */
+    private Lshw()
+    {
+        throw new UnsupportedOperationException();
+    }
 
-	/**
-	 * Parser a given XML and return the informations as list of
-	 * {@link NodeInfo}.
-	 * 
-	 * @param xml
-	 *            The XML to be parsed
-	 * @return The {@link Nodes} info
-	 * @throws IllegalArgumentException
-	 *             Throw if the XML is <code>null</code> or <em>empty</em>.
-	 * @throws LshwParserException
-	 *             Throw if is impossible to parser the XML.
-	 */
-	public static Nodes unmarshall(final String xml) {
+    /**
+     * Parser a given XML and return the informations as list of {@link NodeInfo}.
+     * 
+     * @param xml
+     *            The XML to be parsed
+     * @return The {@link Nodes} info
+     * @throws IllegalArgumentException
+     *             Throw if the XML is <code>null</code> or <em>empty</em>.
+     * @throws LshwParserException
+     *             Throw if is impossible to parser the XML.
+     */
+    public static Nodes unmarshall(final String xml)
+    {
 
-		if (xml == null || xml.trim().isEmpty()) {
-			throw new IllegalArgumentException("Xml must not be null or empty.");
-		}
+        if (xml == null || xml.trim().isEmpty())
+        {
+            throw new IllegalArgumentException("Xml must not be null or empty.");
+        }
 
-		String xmlToParser = xml;
+        String xmlToParser = xml;
 
-		if (xmlToParser.indexOf(START_TAG) == -1) {
-			xmlToParser = String.format("<list>\n%s\n</list>", xml.trim());
-		}
+        if (xmlToParser.indexOf(START_TAG) == -1)
+        {
+            xmlToParser = String.format("<list>\n%s\n</list>", xml.trim());
+        }
 
-		try {
-			return new JaxbXmlParser<Nodes>(Nodes.class).unmarshal(xmlToParser);
-		} catch (JAXBException | IOException e) {
-			throw new LshwParserException(e.getMessage(), e);
-		}
-	}
+        try
+        {
+            return new JaxbXmlParser<Nodes>(Nodes.class).unmarshal(xmlToParser);
+        }
+        catch (JAXBException | IOException e)
+        {
+            throw new LshwParserException(e.getMessage(), e);
+        }
+    }
 
-	/**
-	 * Generate a XML of a given {@link Nodes} instance.
-	 * 
-	 * @param nodes
-	 *            The instance to be serialized to XML format.
-	 * @return The XML representation of the instance.
-	 * @throws LshwParserException
-	 *             Throw if is impossible to generate the XML of the
-	 *             {@link Nodes}.
-	 */
-	public static String marshall(Nodes nodes) {
-		try {
-			return new JaxbXmlParser<Nodes>(Nodes.class).marshal(nodes);
-		} catch (JAXBException exception) {
-			throw new LshwParserException(exception.getMessage(), exception);
-		}
-	}
+    /**
+     * Generate a XML of a given {@link Nodes} instance.
+     * 
+     * @param nodes
+     *            The instance to be serialized to XML format.
+     * @return The XML representation of the instance.
+     * @throws LshwParserException
+     *             Throw if is impossible to generate the XML of the {@link Nodes}.
+     */
+    public static String marshall(Nodes nodes)
+    {
+        try
+        {
+            return new JaxbXmlParser<Nodes>(Nodes.class).marshal(nodes);
+        }
+        catch (JAXBException exception)
+        {
+            throw new LshwParserException(exception.getMessage(), exception);
+        }
+    }
 
-	/**
-	 * Generate a XML using the given nodes. The nodes are put together in the
-	 * XML.
-	 * 
-	 * @param nodeinfos
-	 *            The nodes to be include in the XML output.
-	 * @return The XML representation of the {@link NodeInfo}
-	 * @see #marshall(Nodes)
-	 */
-	public static String marshall(NodeInfo... nodeinfos) {
-		if (nodeinfos != null && nodeinfos.length > 0) {
-			return marshall(new Nodes(nodeinfos));
-		}
-		return null;
-	}
+    /**
+     * Generate a XML using the given nodes. The nodes are put together in the XML.
+     * 
+     * @param nodeinfos
+     *            The nodes to be include in the XML output.
+     * @return The XML representation of the {@link NodeInfo}
+     * @see #marshall(Nodes)
+     */
+    public static String marshall(NodeInfo... nodeinfos)
+    {
+        if (nodeinfos != null && nodeinfos.length > 0)
+        {
+            return marshall(new Nodes(nodeinfos));
+        }
+        return null;
+    }
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 Alessandro
+ * Copyright (c) 2013 Contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -19,6 +19,9 @@
  * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * Contributors:
+ *    Alessandro Ferreira Leite - the initial implementation.
  */
 package lshw.parser.xml.jaxb;
 
@@ -47,229 +50,243 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 @SuppressWarnings("unchecked")
-public final class JaxbXmlParser<E> {
+public final class JaxbXmlParser<E>
+{
 
-	public static final String DEFAULT_XML_ENCODING = "UTF-8";
+    public static final String DEFAULT_XML_ENCODING = "UTF-8";
 
-	private static final Logger LOG = Logger.getLogger(JaxbXmlParser.class
-			.getName());
+    private static final Logger LOG = Logger.getLogger(JaxbXmlParser.class.getName());
 
-	protected final DocumentBuilderFactory documentFactory = DocumentBuilderFactory
-			.newInstance();
+    protected final DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
 
-	private Schema schema;
+    private Schema schema;
 
-	private String[] contextPath;
+    private String[] contextPath;
 
-	protected static final Map<Object, JAXBContext> JAXB_CONTEXT = new ConcurrentHashMap<Object, JAXBContext>();
+    protected static final Map<Object, JAXBContext> JAXB_CONTEXT = new ConcurrentHashMap<Object, JAXBContext>();
 
-	public JaxbXmlParser() {
-	}
+    public JaxbXmlParser()
+    {
+    }
 
-	public JaxbXmlParser(URL urlSchema, Class<?>... types) throws JAXBException {
-		this(types);
-		this.setSchema(getSchema(urlSchema));
-	}
-	
-	public JaxbXmlParser(Class<?>... types) throws JAXBException {
-		if (types != null && types.length > 0) {
-			synchronized (JAXB_CONTEXT) {
-				this.contextPath = new String[] { types[0].getPackage()
-						.getName() };
-				JaxbXmlParser.JAXB_CONTEXT.put(types[0].getPackage().getName(),
-						JAXBContext.newInstance(types));
-			}
-		}
-	}
+    public JaxbXmlParser(URL urlSchema, Class<?>... types) throws JAXBException
+    {
+        this(types);
+        this.setSchema(getSchema(urlSchema));
+    }
 
-	public JaxbXmlParser(URL urlSchema, String... contextPath)
-			throws JAXBException {
-		this(getSchema(urlSchema), contextPath);
-	}
+    public JaxbXmlParser(Class<?>... types) throws JAXBException
+    {
+        if (types != null && types.length > 0)
+        {
+            synchronized (JAXB_CONTEXT)
+            {
+                this.contextPath = new String[] { types[0].getPackage().getName() };
+                JaxbXmlParser.JAXB_CONTEXT.put(types[0].getPackage().getName(), JAXBContext.newInstance(types));
+            }
+        }
+    }
 
-	public JaxbXmlParser(Schema schema, String... contextPath)
-			throws JAXBException {
-		this.contextPath = contextPath;
-		this.setSchema(schema);
+    public JaxbXmlParser(URL urlSchema, String... contextPath) throws JAXBException
+    {
+        this(getSchema(urlSchema), contextPath);
+    }
 
-		if (contextPath != null && contextPath.length > 0) {
-			StringBuilder sb = new StringBuilder(contextPath[0]);
-			for (int i = 1; i < contextPath.length; i++) {
-				sb.append(":" + contextPath[i]);
-			}
+    public JaxbXmlParser(Schema schema, String... contextPath) throws JAXBException
+    {
+        this.contextPath = contextPath;
+        this.setSchema(schema);
 
-			synchronized (JAXB_CONTEXT) {
-				JaxbXmlParser.JAXB_CONTEXT.put(contextPath,
-						JAXBContext.newInstance(sb.toString()));
-			}
-		}
-	}
+        if (contextPath != null && contextPath.length > 0)
+        {
+            StringBuilder sb = new StringBuilder(contextPath[0]);
+            for (int i = 1; i < contextPath.length; i++)
+            {
+                sb.append(":" + contextPath[i]);
+            }
 
-	protected void setSchema(Schema schema) {
-		this.schema = schema;
-		if (!(schema == null)) {
-			this.documentFactory.setSchema(schema);
-			this.documentFactory.setValidating(Boolean.TRUE);
-			documentFactory.setNamespaceAware(Boolean.TRUE);
-			documentFactory.setIgnoringComments(Boolean.TRUE);
-		}
-	}
+            synchronized (JAXB_CONTEXT)
+            {
+                JaxbXmlParser.JAXB_CONTEXT.put(contextPath, JAXBContext.newInstance(sb.toString()));
+            }
+        }
+    }
 
-	public JaxbXmlParser(Schema schema) {
-		setSchema(schema);
-	}
+    protected void setSchema(Schema schema)
+    {
+        this.schema = schema;
+        if (!(schema == null))
+        {
+            this.documentFactory.setSchema(schema);
+            this.documentFactory.setValidating(Boolean.TRUE);
+            documentFactory.setNamespaceAware(Boolean.TRUE);
+            documentFactory.setIgnoringComments(Boolean.TRUE);
+        }
+    }
 
-	public static Schema getSchema(final URL url) {
-		try {
-			return SchemaFactory
-					.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI).newSchema(
-							url);
-		} catch (SAXException exception) {
-			LOG.debug(exception.getMessage(), exception);
-		}
-		return null;
-	}
+    public JaxbXmlParser(Schema schema)
+    {
+        setSchema(schema);
+    }
 
-	protected DocumentBuilderFactory getDocumentFactory() {
-		return this.documentFactory;
-	}
+    public static Schema getSchema(final URL url)
+    {
+        try
+        {
+            return SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI).newSchema(url);
+        }
+        catch (SAXException exception)
+        {
+            LOG.debug(exception.getMessage(), exception);
+        }
+        return null;
+    }
 
-	protected Document getDocument(E type) throws ParserConfigurationException,
-			JAXBException {
+    protected DocumentBuilderFactory getDocumentFactory()
+    {
+        return this.documentFactory;
+    }
 
-		Document document = this.getDocumentFactory().newDocumentBuilder()
-				.newDocument();
-		Marshaller marshaller = JAXBContext.newInstance(type.getClass())
-				.createMarshaller();
-		marshaller.setProperty("jaxb.formatted.output", Boolean.TRUE);
-		marshaller.setProperty(Marshaller.JAXB_ENCODING, DEFAULT_XML_ENCODING);
-		marshaller.marshal(type, document);
+    protected Document getDocument(E type) throws ParserConfigurationException, JAXBException
+    {
 
-		return document;
-	}
+        Document document = this.getDocumentFactory().newDocumentBuilder().newDocument();
+        Marshaller marshaller = JAXBContext.newInstance(type.getClass()).createMarshaller();
+        marshaller.setProperty("jaxb.formatted.output", Boolean.TRUE);
+        marshaller.setProperty(Marshaller.JAXB_ENCODING, DEFAULT_XML_ENCODING);
+        marshaller.marshal(type, document);
 
-	protected Schema getSchema() {
-		return schema;
-	}
+        return document;
+    }
 
-	private String getContextPath() {
-		StringBuilder sb = new StringBuilder(contextPath[0]);
-		for (int i = 1; i < contextPath.length; i++) {
-			sb.append(":" + contextPath[i]);
-		}
-		return sb.toString();
-	}
+    protected Schema getSchema()
+    {
+        return schema;
+    }
 
-	private String getContextPath(String... paths) {
-		StringBuilder sb = new StringBuilder(paths[0]);
+    private String getContextPath()
+    {
+        StringBuilder sb = new StringBuilder(contextPath[0]);
+        for (int i = 1; i < contextPath.length; i++)
+        {
+            sb.append(":" + contextPath[i]);
+        }
+        return sb.toString();
+    }
 
-		for (int i = 1; i < paths.length; i++) {
-			sb.append(":" + paths[i]);
-		}
-		return sb.toString();
-	}
+    private String getContextPath(String... paths)
+    {
+        StringBuilder sb = new StringBuilder(paths[0]);
 
-	protected synchronized JAXBContext getContext(String... contextPath)
-			throws JAXBException {
-		JAXBContext context;
-		if ((context = JaxbXmlParser.JAXB_CONTEXT.get(contextPath)) == null) {
-			JaxbXmlParser.JAXB_CONTEXT.put(
-					contextPath,
-					context = JAXBContext
-							.newInstance(getContextPath(contextPath)));
-		}
-		return context;
-	}
+        for (int i = 1; i < paths.length; i++)
+        {
+            sb.append(":" + paths[i]);
+        }
+        return sb.toString();
+    }
 
-	protected synchronized JAXBContext getContext() throws JAXBException {
-		return this.getContext(this.contextPath);
-	}
+    protected synchronized JAXBContext getContext(String... contextPath) throws JAXBException
+    {
+        JAXBContext context;
+        if ((context = JaxbXmlParser.JAXB_CONTEXT.get(contextPath)) == null)
+        {
+            JaxbXmlParser.JAXB_CONTEXT.put(contextPath, context = JAXBContext.newInstance(getContextPath(contextPath)));
+        }
+        return context;
+    }
 
-	protected Marshaller createMarshaller(String packageName)
-			throws JAXBException {
-		final Marshaller marshaller = getContext(packageName)
-				.createMarshaller();
-		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		marshaller.setProperty(Marshaller.JAXB_ENCODING, DEFAULT_XML_ENCODING);
+    protected synchronized JAXBContext getContext() throws JAXBException
+    {
+        return this.getContext(this.contextPath);
+    }
 
-		if (!(this.getSchema() == null)) {
-			marshaller.setSchema(getSchema());
-		}
+    protected Marshaller createMarshaller(String packageName) throws JAXBException
+    {
+        final Marshaller marshaller = getContext(packageName).createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        marshaller.setProperty(Marshaller.JAXB_ENCODING, DEFAULT_XML_ENCODING);
 
-		return marshaller;
-	}
+        if (!(this.getSchema() == null))
+        {
+            marshaller.setSchema(getSchema());
+        }
 
-	protected Marshaller createMarshaller() throws JAXBException {
-		return createMarshaller(getContextPath());
-	}
+        return marshaller;
+    }
 
-	protected Unmarshaller createUnmarshaller(String contextPath)
-			throws JAXBException {
+    protected Marshaller createMarshaller() throws JAXBException
+    {
+        return createMarshaller(getContextPath());
+    }
 
-		final Unmarshaller unmarshaller = getContext(contextPath)
-				.createUnmarshaller();
+    protected Unmarshaller createUnmarshaller(String contextPath) throws JAXBException
+    {
 
-		if (!(getSchema() == null)) {
-			unmarshaller.setSchema(getSchema());
-		}
+        final Unmarshaller unmarshaller = getContext(contextPath).createUnmarshaller();
 
-		return unmarshaller;
-	}
+        if (!(getSchema() == null))
+        {
+            unmarshaller.setSchema(getSchema());
+        }
 
-	protected Unmarshaller createUnmarshaller() throws JAXBException {
-		return this.createUnmarshaller(getContextPath());
-	}
+        return unmarshaller;
+    }
 
-	public E unmarshal(final String xml, final String charsetName)
-			throws JAXBException, IOException {
-		try (ByteArrayInputStream input = new ByteArrayInputStream(
-				xml.getBytes(Charset.forName((charsetName != null && charsetName
-						.isEmpty()) ? charsetName : DEFAULT_XML_ENCODING)))) {
-			return (E) this.createUnmarshaller().unmarshal(input);
-		}
-	}
+    protected Unmarshaller createUnmarshaller() throws JAXBException
+    {
+        return this.createUnmarshaller(getContextPath());
+    }
 
-	public E unmarshal(final String xml) throws JAXBException, IOException {
-		return this.unmarshal(xml, DEFAULT_XML_ENCODING);
-	}
+    public E unmarshal(final String xml, final String charsetName) throws JAXBException, IOException
+    {
+        try (ByteArrayInputStream input = new ByteArrayInputStream(
+                xml.getBytes(Charset.forName((charsetName != null && charsetName.isEmpty()) ? charsetName : DEFAULT_XML_ENCODING))))
+        {
+            return (E) this.createUnmarshaller().unmarshal(input);
+        }
+    }
 
-	public final String marshal(Object obj) throws JAXBException {
+    public E unmarshal(final String xml) throws JAXBException, IOException
+    {
+        return this.unmarshal(xml, DEFAULT_XML_ENCODING);
+    }
 
-		try (StringWriter writer = new StringWriter()) {
-			createMarshaller().marshal(obj, writer);
-			return writer.toString();
-		} catch (IOException exception) {
-			LOG.debug(exception.getMessage(), exception);
-		}
-		return null;
-	}
+    public final String marshal(Object obj) throws JAXBException
+    {
 
-	public final E unmarshal(final File file) throws JAXBException,
-			SAXException {
-		return (E) this.createUnmarshaller().unmarshal(file);
-	}
+        try (StringWriter writer = new StringWriter())
+        {
+            createMarshaller().marshal(obj, writer);
+            return writer.toString();
+        }
+        catch (IOException exception)
+        {
+            LOG.debug(exception.getMessage(), exception);
+        }
+        return null;
+    }
 
-	public final E unmarshal(final InputStream input) throws JAXBException,
-			SAXException {
-		return (E) this.createUnmarshaller().unmarshal(input);
-	}
+    public final E unmarshal(final File file) throws JAXBException, SAXException
+    {
+        return (E) this.createUnmarshaller().unmarshal(file);
+    }
 
-	public Document getXmlDocumentOf(final String xmlText) throws IOException,
-			ParserConfigurationException, SAXException {
-		Document document = this
-				.getDocumentFactory()
-				.newDocumentBuilder()
-				.parse(new ByteArrayInputStream(xmlText
-						.getBytes(DEFAULT_XML_ENCODING)));
-		document.normalizeDocument();
-		return document;
-	}
+    public final E unmarshal(final InputStream input) throws JAXBException, SAXException
+    {
+        return (E) this.createUnmarshaller().unmarshal(input);
+    }
 
-	public Document loadFromXmlFile(File xmlFile) throws IOException,
-			ParserConfigurationException, SAXException {
-		Document document = this.documentFactory.newDocumentBuilder().parse(
-				xmlFile);
-		document.normalizeDocument();
-		return document;
-	}
+    public Document getXmlDocumentOf(final String xmlText) throws IOException, ParserConfigurationException, SAXException
+    {
+        Document document = this.getDocumentFactory().newDocumentBuilder().parse(new ByteArrayInputStream(xmlText.getBytes(DEFAULT_XML_ENCODING)));
+        document.normalizeDocument();
+        return document;
+    }
+
+    public Document loadFromXmlFile(File xmlFile) throws IOException, ParserConfigurationException, SAXException
+    {
+        Document document = this.documentFactory.newDocumentBuilder().parse(xmlFile);
+        document.normalizeDocument();
+        return document;
+    }
 }
