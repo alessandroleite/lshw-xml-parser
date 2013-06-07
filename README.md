@@ -11,14 +11,14 @@ Usage
 
 Parsing a XML file returned by the lshw command.
 
-   Nodes nodes = lshw.parser.xml.Lshw.unmarshall("/home/lshw-output-hardware-description.xml");
+	Nodes nodes = lshw.parser.xml.Lshw.unmarshall("/home/lshw-output-hardware-description.xml");
 
 Now, we can iterate through the nodes:
 
-   for (NodeInfo node: nodes)
-   { 
-      System.out.println(node);
-   }
+	for (NodeInfo node: nodes)
+	{ 
+		System.out.println(node);
+	}
 
 Or we can find a node by its id.
 
