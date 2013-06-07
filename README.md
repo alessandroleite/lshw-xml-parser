@@ -22,7 +22,7 @@ Now, we can iterate through the nodes:
 
 Or we can find a node by its id.
 
-   NodeInfo node = nodes.findNodeByHardwareId("1");
+	NodeInfo node = nodes.findNodeByHardwareId("1");
    
 
 How to contribute
