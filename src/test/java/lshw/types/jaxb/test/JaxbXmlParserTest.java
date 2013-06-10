@@ -42,9 +42,9 @@ import org.junit.Test;
 
 public class JaxbXmlParserTest
 {
-    private String xmlText_;
+    private String xmlText;
 
-    private JaxbXmlParser<Nodes> parser_;
+    private JaxbXmlParser<Nodes> parser;
 
     @Before
     public void setUp() throws IOException, JAXBException
@@ -58,27 +58,27 @@ public class JaxbXmlParserTest
             }
         }
 
-        xmlText_ = sb.toString();
-        parser_ = new JaxbXmlParser<>(Nodes.class);
+        xmlText = sb.toString();
+        parser = new JaxbXmlParser<>(Nodes.class);
     }
 
     @Test
     public void must_unmarshal_two_nodes() throws JAXBException, IOException
     {
-        assert_that_xml_has_two_nodes(xmlText_);
+        assert_that_xml_has_two_nodes(xmlText);
     }
 
     @Test
     public void must_marshal_two_nodes() throws JAXBException, IOException
     {
-        Nodes nodes = assert_that_xml_has_two_nodes(xmlText_);
-        String nodes_xml = parser_.marshal(nodes);
+        Nodes nodes = assert_that_xml_has_two_nodes(xmlText);
+        String nodes_xml = parser.marshal(nodes);
         assert_that_xml_has_two_nodes(nodes_xml);
     }
 
     Nodes assert_that_xml_has_two_nodes(String xml) throws JAXBException, IOException
     {
-        Nodes nodes = parser_.unmarshal(xml);
+        Nodes nodes = parser.unmarshal(xml);
         assertNotNull(nodes);
         assertEquals(2, nodes.getNodes().size());
         return nodes;

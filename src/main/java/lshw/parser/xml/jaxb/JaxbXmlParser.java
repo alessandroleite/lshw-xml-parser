@@ -65,10 +65,6 @@ public final class JaxbXmlParser<E>
 
     protected static final Map<Object, JAXBContext> JAXB_CONTEXT = new ConcurrentHashMap<Object, JAXBContext>();
 
-    public JaxbXmlParser()
-    {
-    }
-
     public JaxbXmlParser(URL urlSchema, Class<?>... types) throws JAXBException
     {
         this(types);

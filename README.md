@@ -9,9 +9,9 @@ A XML parser for the [lshw][lshw] output.
 Usage
 --------------
 
-Parsing a XML file returned by the lshw command.
+1. Parsing a XML returned by the lshw command.
 
-	Nodes nodes = lshw.parser.xml.Lshw.unmarshall("/home/lshw-output-hardware-description.xml");
+	Nodes nodes = lshw.parser.xml.Lshw.unmarshall("lshw-output-hardware-description.xml");
 
 Now, we can iterate through the nodes:
 
@@ -23,7 +23,16 @@ Now, we can iterate through the nodes:
 Or we can find a node by its id.
 
 	NodeInfo node = nodes.findNodeByHardwareId("1");
-   
+
+2. Generating a XML
+
+   lshw.parser.xml.Lshw.marshall(new NodeInfo("hardware 1"), new NodeInfo("hardware 2"), ...);
+
+or 
+   lshw.parser.xml.Lshw.marshall(new Nodes());
+
+
+See the JUnit class: lshw.types.jaxb.test.JaxbXmlParserTest
 
 How to contribute
 --------------
