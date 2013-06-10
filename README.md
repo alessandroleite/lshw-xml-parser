@@ -33,7 +33,7 @@ How use it ?
 
 		NodeInfo node = nodes.findNodeByHardwareId("1");
 
-	b. Generating a XML
+	b) Generating a XML
 
    		lshw.parser.xml.Lshw.marshall(new NodeInfo("hardware 1"), new NodeInfo("hardware 2"), ...);
    		
