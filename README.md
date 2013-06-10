@@ -6,35 +6,47 @@ What is it ?
 
 A XML parser for the [lshw][lshw] output.
 
-Usage
---------------
+How use it ?
+------------
 
-1. Parsing a XML returned by the lshw command.
+1. ##### Maven Repository
 
-	Nodes nodes = lshw.parser.xml.Lshw.unmarshall("lshw-output-hardware-description.xml");
-
-Now, we can iterate through the nodes:
-
-	for (NodeInfo node: nodes)
-	{ 
-		System.out.println(node);
-	}
-
-Or we can find a node by its id.
-
-	NodeInfo node = nodes.findNodeByHardwareId("1");
-
-2. Generating a XML
-
-   lshw.parser.xml.Lshw.marshall(new NodeInfo("hardware 1"), new NodeInfo("hardware 2"), ...);
-
-or 
-   lshw.parser.xml.Lshw.marshall(new Nodes());
+	See instructions in [Maven Repository](https://github.com/alessandroleite/maven-repository)
 
 
-See the JUnit class: lshw.types.jaxb.test.JaxbXmlParserTest
+2. ##### Usage
 
-How to contribute
+
+	a) Parsing a XML returned by the lshw command.
+
+
+		Nodes nodes = lshw.parser.xml.Lshw.unmarshall("lshw-output-hardware-description.xml");
+	
+	Now, we can iterate through the nodes:
+	
+		for (NodeInfo node: nodes)
+		{ 
+			System.out.println(node);
+		}
+
+	Or we can find a node by its id.
+
+		NodeInfo node = nodes.findNodeByHardwareId("1");
+
+	b. Generating a XML
+
+   		lshw.parser.xml.Lshw.marshall(new NodeInfo("hardware 1"), new NodeInfo("hardware 2"), ...);
+   		
+
+	or
+	
+		lshw.parser.xml.Lshw.marshall(new Nodes());
+		
+
+	See the JUnit's class: lshw.types.jaxb.test.JaxbXmlParserTest
+	
+
+How contribute
 --------------
 
 ### Reporting a Bug / Requesting a Feature
