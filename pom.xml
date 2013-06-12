@@ -1,11 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>lshw</groupId>
 	<artifactId>xml-parser</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<inceptionYear>2013</inceptionYear>
 	<name>lshw-xml-parser</name>
 
@@ -44,7 +43,7 @@
 		<connection>scm:git:ssh://github.com/alessandroleite/lshw-xml-parser.git</connection>
 		<developerConnection>scm:git:git@github.com:alessandroleite/lshw-xml-parser.git</developerConnection>
 		<url>https://github.com/alessandroleite/lshw-xml-parser</url>
-		<tag>HEAD</tag>
+		<tag>1.0.0</tag>
 	</scm>
 
 	<developers>
@@ -199,10 +198,10 @@
 							  <![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 							<fileset-config file-format-version="1.2.0" simple-config="true" sync-formatter="true">
 							  <local-check-config name="${project.groupId}-checkstyle" location="${checkstyle.file}" type="external" description="">
-							    <additional-data name="protect-config-file" value="false"/>
+							    <additional-data name="protect-config-file" value="false" />
 							  </local-check-config>
 							  <fileset name="all" enabled="true" check-config-name="${project.groupId}-checkstyle" local="true">
-							    <file-match-pattern match-pattern="." include-pattern="true"/>
+							    <file-match-pattern match-pattern="." include-pattern="true" />
 							  </fileset>
 							</fileset-config>
 					]]>
