@@ -1,12 +1,12 @@
 [lshw][lshw] (Hardware Lister) XML Parser [![Build Status](https://travis-ci.org/alessandroleite/lshw-xml-parser.png?branch=master)](https://travis-ci.org/alessandroleite/lshw-xml-parser)
 ===================
 
-What is it ?
+What is it?
 ------------
 
 A XML parser for the [lshw][lshw] output.
 
-How use it ?
+How to use it?
 ------------
 
 1. ##### Maven Repository
@@ -46,14 +46,14 @@ How use it ?
 	See the JUnit's class: lshw.types.jaxb.test.JaxbXmlParserTest
 	
 
-How contribute
+How to contribute
 --------------
 
 ### Reporting a Bug / Requesting a Feature
 
 To report an issue or request a new feature you just have to open an issue in the repository issue tracker (<https://github.com/alessandroleite/lshw-xml-parser/issues>).
 
-### Contributing some code
+### Contributing with code
 
 To contribute, follow this steps:
 
